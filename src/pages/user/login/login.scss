@@ -1,0 +1,18 @@
+@import '@/styles/variables';
+@import '@/styles/mixin';
+
+.logo-scope {
+	@include commonFlex();
+	flex-direction: column;
+	img {
+		width: 80px;
+	}
+	span {
+		font-size: $font-size-very-large;
+	}
+	margin-bottom: 27px;
+}
+
+.prefixIcon {
+  @include prefixIcon()
+}

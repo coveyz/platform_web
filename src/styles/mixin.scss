@@ -1,0 +1,11 @@
+@import './variables';
+
+@mixin commonFlex() {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@mixin prefixIcon {
+  color: $primary-color;
+}

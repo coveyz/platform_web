@@ -1,10 +1,24 @@
 @import '~antd/dist/antd.css';
+// @import '@/styles/variables';
+// @import '@/styles/mixin';
+
 * {
 	padding: 0;
 	margin: 0;
 }
+.App,
+#root,
+html,
 body {
 	height: 100%;
+}
+
+@mixin commonFlex() {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+body {
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
@@ -16,12 +30,7 @@ label {
 }
 
 html {
-	height: 100%;
 	box-sizing: border-box;
-}
-
-.App {
-	height: 100%;
 }
 
 *,
