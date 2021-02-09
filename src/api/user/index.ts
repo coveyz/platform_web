@@ -4,7 +4,7 @@ export const login = (requestData: any) => {
   return http({
     method: 'POST',
     data: requestData,
-    url: `/sso/oauth/login`,
+    url: `/api/sso/oauth/login`,
     withCredentials: true
   })
 }
