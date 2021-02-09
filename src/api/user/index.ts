@@ -12,7 +12,7 @@ export const login = (requestData: any) => {
 export const logout = () => {
   return http({
     method: "GET",
-    url: "/sso/oauth/logout",
+    url: "/api/sso/oauth/logout",
   });
 };
 
@@ -20,6 +20,6 @@ export const permissionList = (requestData: any) => {
   return http({
     method: "POST",
     data: requestData,
-    url: `/home/listMenu`
+    url: `/api/home/listMenu`
   });
 };
