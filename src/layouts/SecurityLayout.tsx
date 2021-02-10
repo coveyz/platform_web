@@ -4,12 +4,6 @@ import { Result, Button } from 'antd';
 import {connect} from 'react-redux'
 import {constantsRouter} from '@/router/constants'
 
-type SecurityLayoutProps = {
-  token?:string
-}
-
-
-
 const SecurityLayout = (props:any) => {
   const {location,token,children} = props
   const {pathname} = location
@@ -24,6 +18,7 @@ const SecurityLayout = (props:any) => {
       extra={<Button type="primary" onClick={() => back()}>返回</Button>}
     />
   );
+
   const curRouterInfo = constantsRouter.filter(router => router.path === pathname)[0]
 
   if (curRouterInfo && curRouterInfo.title) {

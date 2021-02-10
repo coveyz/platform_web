@@ -1,0 +1,36 @@
+@import '@/styles/mixin';
+@import '@/styles/variables';
+.layout-contain {
+	height: 100%;
+	.layout-contain-header,
+	.layout-contain-footer {
+		box-sizing: border-box;
+		color: #fff;
+	}
+
+	.layout-contain-header {
+		background-color: $global-header-color;
+		height: $global-header + px !important;
+		line-height: $global-header + px !important;
+		@include commonFlex();
+		padding: 0 20px;
+  }
+
+  .laylut-contain-content {
+	  background-image: url('~@/assets/images/user/bg.png');
+  }
+
+	.layout-contain-footer {
+		background-color: $global-header-color;
+		height: $global-footer + px !important;
+		line-height: $global-footer + px !important;
+		padding: 0 5px;
+		.global-footer {
+			@include commonFlex();
+			justify-content: space-between;
+		}
+		.accont-scope {
+			cursor: pointer;
+		}
+	}
+}

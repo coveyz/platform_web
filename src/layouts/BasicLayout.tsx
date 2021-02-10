@@ -1,12 +1,23 @@
-import React from 'react'
+import './BasicLayout.scss'
+import {GlobalHeader,GlobalFooter} from '@/components'
+import { Layout } from 'antd';
+const { Header, Footer, Sider, Content } = Layout;
+
 
 const BasicLayout = (props:any) => {
-  console.log('???',props)
   return (
-    <div>
-      BasicLayoutBasicLayoutBasicLayoutBasicLayoutBasicLayout
-      {props.children}
-    </div>
+    <Layout className="layout-contain">
+      <Header className="layout-contain-header ">
+        <GlobalHeader />
+      </Header>
+      <Content className="laylut-contain-content">
+          BasicLayoutBasicLayoutBasicLayoutBasicLayoutBasicLayout
+          {props.children}
+      </Content>
+      <Footer className="layout-contain-footer">
+        <GlobalFooter />
+      </Footer>
+    </Layout>
   )
 }
 
