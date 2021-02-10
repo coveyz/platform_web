@@ -1,11 +1,14 @@
+import SecurityLayout from '@/layouts/SecurityLayout'
 import UserLayout from '@/layouts/UserLayout'
 import Login from '@/pages/user/login'
 
 import BasicLayout from '@/layouts/BasicLayout'
 import Dashboard from '@/pages/dashboard'
 import Platform from '@/pages/platform'
+import NotFond from '@/pages/404Page'
 
-export const constantRoutes = [
+
+export const routerMap = [
   {
     path: '/user',
     component: UserLayout,
@@ -13,7 +16,7 @@ export const constantRoutes = [
     children: [
       {
         path: '/user/login',
-        name: 'login',
+        name: 'Login',
         component: Login,
         meta: { hidden: true, title: '登录', icon: '', limit: '' }
       }
@@ -21,20 +24,28 @@ export const constantRoutes = [
   },
   {
     path: '/',
-    component: BasicLayout,
+    component: SecurityLayout,
     redirect: '/dashboard',
     children: [
       {
-        path: '/dashboard',
-        name: 'Dashboard',
-        component: Dashboard,
-        meta: { hidden: true, title: '导航', icon: '', limit: '' }
-      }
+        path: '/',
+        component: BasicLayout,
+        redirect: '/dashboard',
+        children: [
+          {
+            path: '/dashboard',
+            name: 'Dashboard',
+            component: Dashboard,
+            meta: { hidden: true, title: '导航', icon: '', limit: '' }
+          },
+          {
+            path: '/platform',
+            name: 'Platform',
+            component: Platform,
+            meta: { hidden: true, title: '平台管理', icon: '', limit: '' }
+          }
+        ]
+      },
     ]
   }
-]
-
-
-export const routesMap = [
-
 ]

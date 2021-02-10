@@ -1,7 +1,7 @@
 import React from 'react'
 
 const BasicLayout = (props:any) => {
-  console.log('???')
+  console.log('???',props)
   return (
     <div>
       BasicLayoutBasicLayoutBasicLayoutBasicLayoutBasicLayout

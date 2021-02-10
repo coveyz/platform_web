@@ -1,17 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Switch,Route,Redirect } from 'react-router-dom'
-import UserLayout from '@/layouts/UserLayout'
-import Loginpage from '@/pages/user/login'
-import {constantRoutes} from '@/router'
+import {routerMap} from '@/router'
+import SecurityLayout from '@/layouts/SecurityLayout'
 
 const generateRoute = (router:any) => {
-  console.log('router',router)
   if (router.children) {
     return ( 
       <Switch  key={`${router.path}${Math.random()}`}>
         <Redirect exact from={router.path} to={router.redirect}/>
         <Route path={router.path} key={`${router.path}${Math.random()}`} >
-            <router.component>
+            <router.component {...router}>
                 {
                   router.children.map((item:any)=>{
                     return generateRoute(item)
@@ -19,11 +17,11 @@ const generateRoute = (router:any) => {
                 }
             </router.component>
         </Route>
-    </Switch>
+     </Switch>
    )
   } else {
     return (
-        <Route exact path={router.path} component={router.component} key={`${router.path}${Math.random()}`} limit={router.meta.limit} name={router.meta.title}/>
+        <Route {...router} exact  path={router.path} component={router.component} key={`${router.path}${Math.random()}`} />
     )
   }
 }
@@ -33,7 +31,7 @@ function App() {
     <BrowserRouter>
        {/* 生成 基本路由🚚 */}
         {
-          constantRoutes.map((route) => {
+          routerMap.map((route) => {
              return generateRoute(route)
           })
         }

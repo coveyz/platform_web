@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Dashboard = () => {
-  console.log('>>>')
+const Dashboard = (props:any) => {
+  console.log('>>>',props)
   return (
     <div>
       dashboard
