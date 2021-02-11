@@ -42,9 +42,25 @@ class SecurityLayout extends Component<SecurityLayoutProps> {
 
   render() {
     const {permisisontTabs}  = this.state
-    const {children } = this.props
-    return permisisontTabs && permisisontTabs.length === 0 ? 
-      (
+    const {children} = this.props
+    const back = () => {
+      window.history.back()
+    }
+    const noMatch = (
+      <Result
+        status={404}
+        title="404"
+        subTitle="Sorry, you are not authorized to access this page."
+        extra={
+          <Button type="primary" onClick={back}>
+           返回
+          </Button>
+        }
+      />
+    );
+    
+    if (permisisontTabs && permisisontTabs.length === 0) {
+      return (
         <div
           style={{
             width: '100%',
@@ -56,10 +72,13 @@ class SecurityLayout extends Component<SecurityLayoutProps> {
         >
           <Spin size="large" />
         </div> 
-      )
-    : (
-       children
-    )
+      ) 
+    } else {
+      const {pathname} = window.location
+      const curRouterInfo = constantsRouter.filter(router => router.path === pathname)[0]
+      if (!curRouterInfo) return noMatch
+      return children
+    }
   }
 }
 
