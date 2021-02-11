@@ -9,8 +9,15 @@ export const constantsRouter = [
   {
     path: '/platform',
     title: '平台管理',
-    limit: '',
+    limit: 'ptgl',
     icon: "",
     hidden: true
-  }
+  },
+  {
+    path: '/system',
+    title: '系统管理',
+    limit: 'xtgl',
+    icon: "",
+    hidden: true
+  },
 ]

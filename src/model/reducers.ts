@@ -1,9 +1,8 @@
-import { UserState, PermissionState } from './reducers.d'
+import { UserState } from './reducers.d'
 import { getToken, removeToken } from '@/utils/auth'
 
 export type reducerStae = {
   user: UserState
-  permission: PermissionState
 }
 
 export type ActionState = {
@@ -13,7 +12,6 @@ export type ActionState = {
 
 const reducers: reducerStae = {
   user: { token: getToken(), permissionTabs: [] },
-  permission: { permission_routes: [] },
 }
 
 const collector = (state = { ...reducers }, action: ActionState) => {
@@ -22,15 +20,11 @@ const collector = (state = { ...reducers }, action: ActionState) => {
     //* 设置 token
     case 'SET_TOKEN':
       state['user']['token'] = action.payload.token
-      console.log('reducer-token', state)
-      return state
-    //* 保存 权限路由表
-    case 'SET_ROUTES':
-      state['permission']['permission_routes'] = action.payload.routes
       return state
     //* 保存 权限表
     case 'SET_PERMISSIONTABS':
       state['user']['permissionTabs'] = action.payload.permissionTabs
+      console.log('per=>', state)
       return state
     //* 退出登录
     case 'LOGOUT':

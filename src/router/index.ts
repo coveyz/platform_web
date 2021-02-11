@@ -5,7 +5,7 @@ import Login from '@/pages/user/login'
 import BasicLayout from '@/layouts/BasicLayout'
 import Dashboard from '@/pages/dashboard'
 import Platform from '@/pages/platform'
-import NotFond from '@/pages/404Page'
+import System from '@/pages/system'
 
 
 export const routerMap = [
@@ -43,6 +43,12 @@ export const routerMap = [
             name: 'Platform',
             component: Platform,
             meta: { hidden: true, title: '平台管理', icon: '', limit: '' }
+          },
+          {
+            path: '/system',
+            name: 'System',
+            component: System,
+            meta: { hidden: true, title: '系统管理', icon: '', limit: '' }
           }
         ]
       },

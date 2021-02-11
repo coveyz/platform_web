@@ -43,7 +43,7 @@ const UserServer = {
         }
       })
     })
-  }
+  },
 }
 
 function* loginHandle(action: any) {
@@ -54,6 +54,7 @@ function* loginHandle(action: any) {
   console.log('index=>', type)
   window.location.replace(url)
 }
+
 
 function* UserSaga() {
   yield takeEvery('login', loginHandle)
