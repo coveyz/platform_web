@@ -1,0 +1,13 @@
+.svg-icon {
+	width: 1em;
+	height: 1em;
+	vertical-align: -0.15em;
+	fill: rgb(140, 177, 253);
+	overflow: hidden;
+}
+
+.svg-external-icon {
+	background-color: rgb(140, 177, 253);
+	mask-size: cover !important;
+	display: inline-block;
+}

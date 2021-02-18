@@ -22,12 +22,10 @@ class SecurityLayout extends Component<SecurityLayoutProps> {
     this.getPermission()
   }
 
-  async getPermission(){
+   async getPermission(){
     const {token} = this.props
-    if (!token && window.location.pathname !== '/user/login') {
-      return <Redirect to={`/user/login?`} />;
-    } else {
-      const permissionTabs = await getAuthority() as string[]
+    if (token && window.location.pathname !== '/user/login') {
+      const permissionTabs = await getAuthority()
       console.log(permissionTabs)
       this.setState({
         permisisontTabs: permissionTabs
@@ -42,7 +40,7 @@ class SecurityLayout extends Component<SecurityLayoutProps> {
 
   render() {
     const {permisisontTabs}  = this.state
-    const {children} = this.props
+    const {children,token} = this.props
     const back = () => {
       window.history.back()
     }
@@ -58,6 +56,11 @@ class SecurityLayout extends Component<SecurityLayoutProps> {
         }
       />
     );
+
+    if (!token && window.location.pathname !== '/user/login') {
+      console.log('props=>',token)
+      return <Redirect to={`/user/login?`} />;
+    } 
     
     if (permisisontTabs && permisisontTabs.length === 0) {
       return (

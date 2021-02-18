@@ -42,13 +42,13 @@ export const routerMap = [
             path: '/platform',
             name: 'Platform',
             component: Platform,
-            meta: { hidden: true, title: '平台管理', icon: '', limit: '' }
+            meta: { hidden: true, title: '平台管理', icon: 'platform', limit: '' }
           },
           {
             path: '/system',
             name: 'System',
             component: System,
-            meta: { hidden: true, title: '系统管理', icon: '', limit: '' }
+            meta: { hidden: true, title: '系统管理', icon: 'system', limit: '' }
           }
         ]
       },
