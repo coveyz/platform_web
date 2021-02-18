@@ -1,5 +1,12 @@
 export const constantsRouter = [
   {
+    path: '/',
+    title: '导航',
+    limit: '',
+    icon: "",
+    hidden: true
+  },
+  {
     path: '/dashboard',
     title: '导航',
     limit: '',

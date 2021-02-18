@@ -80,6 +80,7 @@ class SecurityLayout extends Component<SecurityLayoutProps> {
       const {pathname} = window.location
       const curRouterInfo = constantsRouter.filter(router => router.path === pathname)[0]
       if (!curRouterInfo) return noMatch
+      document.title = '干部监督综合管控平台'
       return children
     }
   }
@@ -95,4 +96,3 @@ const mapStateToProps = (state:any) => {
 
 
 export default connect(mapStateToProps)(SecurityLayout);
-// export default connect(mapStateToProps,mapDispatchToProps)(withRouter(SecurityLayout));

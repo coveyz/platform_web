@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch,Route,Redirect } from 'react-router-dom'
+import { BrowserRouter, Switch,Route,Redirect,HashRouter } from 'react-router-dom'
 import {routerMap} from '@/router'
 import SecurityLayout from '@/layouts/SecurityLayout'
 

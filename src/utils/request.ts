@@ -1,6 +1,6 @@
 import axios from 'axios'
 // import store from '@/model'
-import { getToken } from '@/utils/auth'
+// import { getToken } from '@/utils/auth'
 import { errorMessage } from '@/utils/tools'
 
 const http = axios.create({})
