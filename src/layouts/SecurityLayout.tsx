@@ -1,9 +1,9 @@
 import React, { Component} from 'react'
-import { Redirect,withRouter,Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { Result, Button,Spin } from 'antd';
 import {connect} from 'react-redux'
 import {constantsRouter} from '@/router/constants'
-import {getPageTitle} from '@/utils/tools'
+// import {getPageTitle} from '@/utils/tools'
 import { getAuthority } from '@/utils/authority'
 
 
@@ -58,7 +58,6 @@ class SecurityLayout extends Component<SecurityLayoutProps> {
     );
 
     if (!token && window.location.pathname !== '/user/login') {
-      console.log('props=>',token)
       return <Redirect to={`/user/login?`} />;
     } 
     

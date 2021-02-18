@@ -2,9 +2,10 @@ import './login.scss'
 import React from 'react'
 import {connect} from 'react-redux'
 import queryString from "query-string";
-import loginImg from '@/assets/images/login/logo.png'
 import { Form, Input, Button,Card } from 'antd';
 import { UserOutlined,LockTwoTone} from '@ant-design/icons';
+import config from '@/config';
+
 
 const Login = (props:any) => {
   const layout = {
@@ -34,7 +35,7 @@ const Login = (props:any) => {
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
-  
+
   return (
     <Card   style={{ width: 350 }}>
       <Form
@@ -44,8 +45,8 @@ const Login = (props:any) => {
         onFinishFailed={onFinishFailed}
       >
       <div className="logo-scope">
-        <img src={loginImg} />
-        <span className="title">干部监督综合管控平台</span>
+        <img src='/static/images/basic/logo.png' alt=""/>
+        <span className="title"> {config.platformTitle} </span>
       </div>
       <Form.Item
         {...layout}
