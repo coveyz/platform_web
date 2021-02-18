@@ -19,8 +19,39 @@
 		a {
 			padding: 0 10px;
 		}
-		.model-item:hover {
-			background-color: rgba(255, 255, 255, 0.5);
-		}
 	}
+
+	// .global-header-entry {
+		.ant-menu {
+			background-color: transparent;
+		}
+
+		.ant-menu-item-selected {
+			border-bottom: 2px solid transparent !important;
+			background-color: rgba(255, 255, 255, 0.2);
+		}
+
+		.ant-menu-item-selected:hover {
+			border-bottom: 2px solid transparent !important;
+		}
+
+		.ant-menu-item:hover {
+			background-color: rgba(255, 255, 255, 0.5);
+			border-bottom: 2px solid transparent !important;
+		}
+
+		.ant-menu-item-selected a {
+			color: #fff !important;
+		}
+
+		.ant-menu-item a {
+			color: #fff !important;
+			border-bottom: 2px solid transparent;
+		}
+
+		.ant-menu-item a:hover {
+			color: #fff !important;
+			border-bottom: 2px solid transparent;
+		}
+	// }
 }
