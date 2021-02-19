@@ -6,6 +6,10 @@ $global-header-color: #184674;
 $global-footer: 30;
 $global-footer-color: #184674;
 
+$global-texture-color: linear-gradient(to bottom right, #cccccc, snow, white, snow, snow, snow, $global-header-color);
+
+
+
 // :export {
 //   font-size-very-large: $font-size-very-large;
 //   primary-color: $primary-color;

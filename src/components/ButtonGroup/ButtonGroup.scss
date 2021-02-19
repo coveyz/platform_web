@@ -1,0 +1,12 @@
+@import '@/styles/variables';
+.buttonGroup-frame {
+  .button-linearButton-item,.button-item {
+    margin-right: 10px;
+	}
+  
+  .button-linearButton-item {
+    background: $global-texture-color;
+    color: #333;
+    border-color: #DCDFE6;
+  }
+}
