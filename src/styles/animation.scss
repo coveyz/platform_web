@@ -1,0 +1,38 @@
+.animate-shake{
+  -webkit-animation-name: animation-shake;
+  -webkit-animation-duration: 0.75s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-direction:alternate;
+}
+/**step 2**/
+@keyframes animation-shake{
+  0%{
+    -webkit-transform:translateX(1px) rotate(1deg);
+  }
+  20%{
+    -webkit-transform:translateX(-1px) rotate(-1deg);
+  }
+  40%{
+    -webkit-transform:translateX(1px) rotate(1deg);
+  }
+  60%{
+    -webkit-transform:translateX(-1px) rotate(-1deg);
+  }
+  80%{
+    -webkit-transform:translateX(1px) rotate(1deg);
+  }
+  100%{
+    -webkit-transform:translateX(-1px) rotate(-1deg);
+  }
+}
+
+@keyframes fade-to-top {
+  from {
+    transform: translateY(0.2rem);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
