@@ -50,7 +50,7 @@ const data = {
     {
       title: '确定',
       name: 'confirm',
-      type: ''
+      type: 'primary'
     }
     
   ]

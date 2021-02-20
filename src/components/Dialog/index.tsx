@@ -20,14 +20,13 @@ const Dialog:React.FC<DialogProps> = (props) => {
   const {dialogInfo} = props
   const {visible} = dialogInfo
 
-  console.log('props.children=>',props.children)
-
  const {operationGroup,content} = props.children as {operationGroup?: Element[],content?: any}
 
   return (
     <div>
       <Modal
           visible={visible}
+          closable={false}
           title={ dialogInfo.title? dialogInfo.title : 'title'}
           footer={
 

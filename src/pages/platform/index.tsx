@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import './platform.scss'
-import {ButtonGroup,Dialog} from '@/components'
+import {ButtonGroup,Dialog,Formdata,Transfer} from '@/components'
 import {buttonState,dropdownButtonState,operationGroupDialogState} from '@/components/type.d'
 import configData from '@/pages/platform/config/platform'
 import PlatformItem from './components/Item'
@@ -13,7 +13,6 @@ const Platform = () => {
     visible: false,
     title: '',
     type: '',
-    operationGroup:[],
     isOption: true
   })
 
@@ -94,17 +93,49 @@ const Platform = () => {
         break;
     }
   }
-  //* 平台项操作
+  //* 平台项 编辑/设置 操作
   const platformItemOptions = (item: any,type: string) => {
     console.log('item=>',item,'type=>',type)
+    setDialogInfo({...dialogInfo,visible: true, title: type === 'setting'? '请选择用户': '修改平台',type: type})
   }
   //* 新增操作
   const addOptions = () => {
     setDialogInfo({...dialogInfo,visible: true, title: '新增平台',type: 'add'})
   }
 
+  //* 平台操作 - 删除/关闭/确定
+  const handlePlatformOption = (item: operationGroupDialogState) => {
+    console.log('操作',item)
+    const {name} = item
+    switch (name) {
+      case 'delete':
+        deleteOption()
+        break;
+      case 'cancel':
+        cancelOption()
+        break;   
+      case 'confirm':
+        confirmOption()
+        break;
+      default:
+        break;
+    }
+  }
+
+  const deleteOption = () => {
+    setDialogInfo({...dialogInfo,visible: false})
+  }
+
+  const cancelOption = () => {
+    setDialogInfo({...dialogInfo,visible: false})
+  }
+
+  const confirmOption = () => {
+    setDialogInfo({...dialogInfo,visible: false})
+  }
+          
   return (
-    <div className='platformManage-frame'>
+            <div className='platformManage-frame'>
       <ButtonGroup configData={configData} handleButtonOptions={handleButtonOptions}/>
 
       <div className="platform-wrapper">
@@ -119,12 +150,11 @@ const Platform = () => {
         {{
           operationGroup: (
             configData.operationGroupOfDialog.map((item:operationGroupDialogState,key:number) => {
-             
               if (item.name === 'delete' && dialogInfo.type !== 'edit') {
                 return
               } else {
                 return (
-                  <Button  type={item.type} key={key}>
+                  <Button  type={item.type} key={key} onClick={()=> handlePlatformOption(item)}>
                     {item.title}
                   </Button>
                 )
@@ -132,7 +162,7 @@ const Platform = () => {
              
             })
           ),
-          content: '1212'
+          content: dialogInfo.type === 'setting' ? <Transfer /> : <Formdata />
         }}
       </Dialog>
     </div>

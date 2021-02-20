@@ -22,7 +22,6 @@ export type DialogState = {
   visible: boolean
   content?: string
   isOption?: boolean
-  operationGroup?: any[] 
 }
 
 export type operationGroupDialogState = {
