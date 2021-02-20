@@ -1,4 +1,4 @@
-import { message } from 'antd';
+import { message, Button } from 'antd';
 
 export const successMessage = (word: string) => {
   message.success(word);
@@ -9,7 +9,7 @@ export const errorMessage = (word: string) => {
 }
 
 
-export const getPageTitle = (title:string) => {
+export const getPageTitle = (title: string) => {
   if (title) {
     document.title = title
   } else {

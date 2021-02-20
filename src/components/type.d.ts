@@ -13,3 +13,20 @@ export type dropdownButtonState = {
   name: string,
   icon?: string
 }
+
+
+export type DialogState = {
+  title?: string
+  width?: string
+  type?: string
+  visible: boolean
+  content?: string
+  isOption?: boolean
+  operationGroup?: any[] 
+}
+
+export type operationGroupDialogState = {
+  title: string
+  name: string,
+  type?:string | any
+}

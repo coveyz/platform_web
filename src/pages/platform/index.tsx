@@ -1,18 +1,27 @@
 import React,{useEffect,useState} from 'react'
 import './platform.scss'
-import {ButtonGroup} from '@/components'
-import {buttonState,dropdownButtonState} from '@/components/type.d'
+import {ButtonGroup,Dialog} from '@/components'
+import {buttonState,dropdownButtonState,operationGroupDialogState} from '@/components/type.d'
 import configData from '@/pages/platform/config/platform'
 import PlatformItem from './components/Item'
-import { Spin,Empty } from 'antd';
+import { Spin,Empty,Button } from 'antd';
 
 const Platform = () => {
   const [platformList,setplatformList] = useState([])
   const [loading,setloading] = useState(true)
+  const [dialogInfo,setDialogInfo] = useState({
+    visible: false,
+    title: '',
+    type: '',
+    operationGroup:[],
+    isOption: true
+  })
 
   useEffect(() => {
     getInit()
-    return () => {}
+    return () => {
+      console.log('xxx')
+    }
   }, [])
 
   const getDataFromFakeInrterface = () => {
@@ -76,7 +85,22 @@ const Platform = () => {
   }
   //* ButtonGroup 事件 🐹
   const handleButtonOptions = (buttonInfo:buttonState | dropdownButtonState) => {
-    console.log('parent',buttonInfo)
+    const {name} = buttonInfo
+    switch (name) {
+      case 'Add':
+        addOptions()    
+        break;
+      default:
+        break;
+    }
+  }
+  //* 平台项操作
+  const platformItemOptions = (item: any,type: string) => {
+    console.log('item=>',item,'type=>',type)
+  }
+  //* 新增操作
+  const addOptions = () => {
+    setDialogInfo({...dialogInfo,visible: true, title: '新增平台',type: 'add'})
   }
 
   return (
@@ -86,10 +110,31 @@ const Platform = () => {
       <div className="platform-wrapper">
         {
           !loading 
-          ?  platformList && platformList.length > 0 ? <PlatformItem platformList={platformList}/> : <Empty className="emptyStyle"/>
+          ?  platformList && platformList.length > 0 ? <PlatformItem platformList={platformList} platformItemOptions={platformItemOptions}/> : <Empty className="emptyStyle"/>
           : <Spin size="large"  className="example"/>
         }
       </div>
+
+      <Dialog dialogInfo={dialogInfo}  >
+        {{
+          operationGroup: (
+            configData.operationGroupOfDialog.map((item:operationGroupDialogState,key:number) => {
+             
+              if (item.name === 'delete' && dialogInfo.type !== 'edit') {
+                return
+              } else {
+                return (
+                  <Button  type={item.type} key={key}>
+                    {item.title}
+                  </Button>
+                )
+              }
+             
+            })
+          ),
+          content: '1212'
+        }}
+      </Dialog>
     </div>
   )
 }

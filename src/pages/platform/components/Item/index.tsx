@@ -3,19 +3,19 @@ import React from 'react'
 import {SvgIcons} from '@/components'
 
 type PlatformProps = {
-  platformList: object[]
+  platformList: object[],
+  platformItemOptions: (item:any,type: string) => void
 }
 
 const platformItem:React.FC<PlatformProps> = (props) => {
-  const {platformList} = props
+  const {platformList,platformItemOptions} = props
 
-  const handleEditOption = (item:any) => {
-    console.log('edit',item);
+
+
+  const handleOptions = (item:any,type:string) => {
+    platformItemOptions(item,type)
   }
 
-  const handleSettingOption = (item:any) => {
-    console.log('setting',item)
-  }
 
   return (
     <>
@@ -29,10 +29,10 @@ const platformItem:React.FC<PlatformProps> = (props) => {
                 </div>
                 <div className="platformName"> {item.title} </div>
                 <div className="action" >
-                  <i onClick={() => handleEditOption(item)}>
+                  <i onClick={() => handleOptions(item,'edit')}>
                     <SvgIcons iconClass='edit' />
                   </i>
-                  <i onClick={() => handleSettingOption(item)}>
+                  <i onClick={() => handleOptions(item,'setting')}>
                    <SvgIcons iconClass='setting'/>
                   </i>
                 </div>
