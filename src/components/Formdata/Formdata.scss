@@ -1,0 +1,12 @@
+@import '@/styles/variables';
+.tipsStyle {
+	label {
+		color: $formdata-specialTips-color;
+	}
+}
+
+.textSoLong {
+  label {
+    line-height: 20px;
+	}
+}

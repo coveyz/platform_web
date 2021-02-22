@@ -14,7 +14,6 @@ export type dropdownButtonState = {
   icon?: string
 }
 
-
 export type DialogState = {
   title?: string
   width?: string
@@ -28,4 +27,26 @@ export type operationGroupDialogState = {
   title: string
   name: string,
   type?:string | any
+}
+
+export interface FormDataState {
+  title: string 
+  name: string
+  type: string
+  level: string
+  tips: boolean
+  readonly: boolean
+}
+
+export interface selectOfFormData extends FormDataState {
+  value: string
+  options: string
+}
+
+export interface inputOfFormData extends FormDataState {
+  value: string
+}
+
+export interface dataOfFormdata extends FormDataState {
+  value: string
 }

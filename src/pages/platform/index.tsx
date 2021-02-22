@@ -70,7 +70,7 @@ const Platform = () => {
           },
         ]
         resolve(datalist)
-      }, 3000);
+      }, 1000);
 
     })
   }
@@ -162,7 +162,7 @@ const Platform = () => {
              
             })
           ),
-          content: dialogInfo.type === 'setting' ? <Transfer /> : <Formdata />
+          content: dialogInfo.type === 'setting' ? <Transfer /> : <Formdata configData={configData}/>
         }}
       </Dialog>
     </div>

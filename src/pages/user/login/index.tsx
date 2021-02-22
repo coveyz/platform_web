@@ -40,7 +40,7 @@ const Login = (props:any) => {
     <Card   style={{ width: 350 }}>
       <Form
         name="basic"
-        initialValues={{ remember: true }}
+        initialValues={{ }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
