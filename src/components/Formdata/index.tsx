@@ -2,6 +2,7 @@ import './Formdata.scss'
 import React,{useState} from 'react'
 import { Form, Button } from 'antd';
 import {InputItem,SelectItem} from './Components'
+import {selectOfFormData,inputOfFormData,dataOfFormdata} from '@/components/type.d'
 
 
 const layout = {
@@ -20,22 +21,27 @@ const validateMessages = {
   },
 };
 
+type mainDataItem =  selectOfFormData | inputOfFormData | dataOfFormdata
 
-// select 类型
-const selectedItem = () => {
-
+export type  FormDaraState = {
+  mainData:  Array<mainDataItem>
 }
 
-const Formdata = (props: any) => {
+export type  FormDataProps  = {
+  configData: FormDaraState
+}
+
+
+const Formdata:React.FC<FormDataProps> = (props) => {
   const {configData} = props
   const [mainDataArr] = useState(configData.mainData)
 
   //* 初始化 整合 formdata 数据🐥
   const initFormDataModel = ():{[name:string]: string | any[] | boolean} => {
-    return mainDataArr.reduce((acc:any,cur:any) => {
+    return mainDataArr.reduce((acc,cur:mainDataItem) => {
       acc[cur.name] = cur.value
       return acc
-    },{}) 
+    },{}) as {[name:string]: string | any[] | boolean}
   }
   const [formModel,setFormModel] = useState(initFormDataModel())
   // const [formModel] = Form.useForm();
@@ -49,7 +55,7 @@ const Formdata = (props: any) => {
       onFinish={onFinish}
       >
         {
-          mainDataArr.map((item:any,key:number) => {
+          mainDataArr.map((item:mainDataItem,key:number) => {
             if (item.type === 'input') {
               return <InputItem key={key} inputInfo={item}/>
             }

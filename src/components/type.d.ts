@@ -29,6 +29,8 @@ export type operationGroupDialogState = {
   type?:string | any
 }
 
+
+ //* FormData typescript
 export interface FormDataState {
   title: string 
   name: string
@@ -40,7 +42,7 @@ export interface FormDataState {
 
 export interface selectOfFormData extends FormDataState {
   value: string
-  options: string
+  options?: string
 }
 
 export interface inputOfFormData extends FormDataState {
