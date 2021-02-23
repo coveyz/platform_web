@@ -1,14 +1,15 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useRef,forwardRef} from 'react'
 import './platform.scss'
 import {ButtonGroup,Dialog,Formdata,Transfer} from '@/components'
 import {buttonState,dropdownButtonState,operationGroupDialogState} from '@/components/type.d'
-import configData from '@/pages/platform/config/platform'
+import config from '@/pages/platform/config/platform'
 import PlatformItem from './components/Item'
 import { Spin,Empty,Button } from 'antd';
 import {connect} from 'react-redux'
 import {integrationData} from '@/utils/tools'
 
 const Platform = (props: any) => {
+  const [configData,setConfigData] = useState(config)
   const [platformList,setplatformList] = useState([])
   const [loading,setloading] = useState(true)
   const [optionObj,setOptionsObj] = useState({})
@@ -102,7 +103,7 @@ const Platform = (props: any) => {
   const getInit = () => {
     setloading(true)
     return Promise.all([getDataFromFakeInrterface(),getDataFromFakeInterfaceOfFormData()]).then(res => {
-      console.log('getInit',res)
+      // console.log('getInit',res)
       const {list,operation} = integrationData(res)
       setloading(false)
       setplatformList(list)
@@ -154,12 +155,29 @@ const Platform = (props: any) => {
   }
 
   const cancelOption = () => {
+    childRef['current']['reset']()
     setDialogInfo({...dialogInfo,visible: false})
   }
 
   const confirmOption = () => {
-    setDialogInfo({...dialogInfo,visible: false})
+    console.log('confire=>',childRef)
+    childRef['current']['verification']().then((res:any) => {
+      console.log('confirmOption-callback',res)
+      setDialogInfo({...dialogInfo,visible: false})
+    })
+
   }
+
+  const clearItemArr = () => {
+    configData['mainData'] = configData['mainData'].map((item:any) => {
+      item.value = Array.isArray(item.value) ? [] : ''
+      return item
+    })
+    setConfigData(configData)
+  }
+
+  const childRef = useRef<any>(null)
+
           
   return (
     <div className='platformManage-frame'>
@@ -189,7 +207,8 @@ const Platform = (props: any) => {
              
             })
           ),
-          content: dialogInfo.type === 'setting' ? <Transfer /> : <Formdata configData={configData} optionObj={optionObj}/>
+         
+          content: dialogInfo.type === 'setting' ? <Transfer /> : <Formdata cRef={childRef} clearItemArr={clearItemArr}   configData={configData} optionObj={optionObj} />
         }}
       </Dialog>
     </div>
