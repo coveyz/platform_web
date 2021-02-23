@@ -8,6 +8,7 @@ const { Option } = Select;
 export type SelectItemProps = {
   selectInfo: selectOfFormData,
   optionObj?:any
+  selectRule: any[]
 }
 
 function onGenderChange(value:any) {
@@ -15,21 +16,23 @@ function onGenderChange(value:any) {
 }
 
 const SelectItem:React.FC<SelectItemProps> = (props) => {
-  const {selectInfo,optionObj} = props
+  const {selectInfo,optionObj,selectRule} = props
 
   return (
-    <Form.Item name={selectInfo.name} label={selectInfo.title} >
-    <Select
-      placeholder={`请选择`}
-      onChange={onGenderChange}
-      allowClear
+    <Form.Item name={selectInfo.name} label={selectInfo.title} 
+    rules={selectRule}
     >
-      {
-       optionObj[selectInfo.name] && optionObj[selectInfo.name].map((item:any,key:number) => {
-          return <Option key={key} value={item.value}>{item.text}</Option>
-        })
-      }
-    </Select>
+      <Select
+        placeholder={`请选择`}
+        onChange={onGenderChange}
+        allowClear
+      >
+        {
+        optionObj[selectInfo.name] && optionObj[selectInfo.name].map((item:any,key:number) => {
+            return <Option key={key} value={item.value}>{item.text}</Option>
+          })
+        }
+      </Select>
    </Form.Item>
 
   )

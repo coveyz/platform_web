@@ -12,22 +12,12 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
-const validateMessages = {
-  required: '${label} is required!',
-  types: {
-    email: '${label} is not a valid email!',
-    number: '${label} is not a valid number!',
-  },
-  number: {
-    range: '${label} must be between ${min} and ${max}',
-  },
-};
-
 type mainDataItem =  selectOfFormData | inputOfFormData | dateOfFormdata
 
 export type  FormDaraState = {
   mainData:  Array<mainDataItem>
-  type: string
+  type: string,
+  rule: any
 }
 
 export type  FormDataProps  = {
@@ -39,6 +29,7 @@ export type  FormDataProps  = {
 const Formdata:React.FC<FormDataProps> = (props) => {
   const {configData,optionObj} = props
   const [mainDataArr] = useState(configData.mainData)
+  const [mainRules] = useState(configData.rule)
   
   //* 初始化 整合 formdata 数据🐥
   const initFormDataModel = ():{[name:string]: string | any[] | boolean} => {
@@ -62,13 +53,13 @@ const Formdata:React.FC<FormDataProps> = (props) => {
       {
         mainDataArr.map((item:mainDataItem,key:number) => {
           if (item.type === 'input') {
-            return <InputItem key={key} inputInfo={item}/>
+            return <InputItem key={key} inputInfo={item} inputRule={mainRules[item.name] ?mainRules[item.name] : null }/>
           }
           else if (item.type === 'select') {
-            return <SelectItem key={key} selectInfo={item} optionObj={optionObj}/>
+            return <SelectItem key={key} selectInfo={item} optionObj={optionObj}  selectRule={mainRules[item.name] ?mainRules[item.name] : null }/>
           } 
           else if (item.type === 'date') {
-            return <DateItem key={key} dateInfo={item}/>
+            return <DateItem key={key} dateInfo={item} dateRule={mainRules[item.name] ?mainRules[item.name] : null }/>
           }
           else {
             return
@@ -80,26 +71,6 @@ const Formdata:React.FC<FormDataProps> = (props) => {
           Submit
         </Button>
       </Form.Item>
-      {/* <Form.Item name={['user', 'name']} label="Name" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'email']} label="Email" rules={[{ type: 'email' }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'age']} label="Age" rules={[{ type: 'number', min: 0, max: 99 }]}>
-        <InputNumber />
-      </Form.Item>
-      <Form.Item name={['user', 'website']} label="Website">
-        <Input />
-      </Form.Item>
-      <Form.Item name={['user', 'introduction']} label="Introduction">
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item> */}
     </Form>
   );
 }

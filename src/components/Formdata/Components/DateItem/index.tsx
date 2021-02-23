@@ -1,10 +1,10 @@
 import React from 'react'
 import { DatePicker, Form } from 'antd';
-import moment from 'moment';
 import {dateOfFormdata} from '@/components/type.d'
 
 export type DateItemProps = {
   dateInfo: dateOfFormdata
+  dateRule: any[]
 }
 
 function onChange(date:any, dateString:any) {
@@ -12,7 +12,7 @@ function onChange(date:any, dateString:any) {
 }
 
 const DateItem:React.FC<DateItemProps> = (props) => {
-  const {dateInfo} = props
+  const {dateInfo,dateRule} = props
   return (
     <Form.Item  
       label={dateInfo.title} 
@@ -23,6 +23,7 @@ const DateItem:React.FC<DateItemProps> = (props) => {
       dateInfo.level === 'special' ? `new-${dateInfo.name}-item` : '',
       dateInfo.title.length > 6 ? 'textSoLong' : ''
       ].join(' ')}
+      rules={dateRule}
     >
       <DatePicker 
         onChange={onChange} 

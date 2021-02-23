@@ -5,10 +5,11 @@ import {inputOfFormData} from '@/components/type.d'
 
 export type InputItemProps = {
   inputInfo: inputOfFormData
+  inputRule: any[]
 }
 
 const InputItem:React.FC<InputItemProps> = (props) => {
-  const {inputInfo} = props     
+  const {inputInfo,inputRule} = props     
   return (
     <Form.Item  label={inputInfo.title} name={inputInfo.name}
       className= {[
@@ -17,6 +18,8 @@ const InputItem:React.FC<InputItemProps> = (props) => {
         inputInfo.level === 'special' ? `new-${inputInfo.name}-item` : '',
         inputInfo.title.length > 6 ? 'textSoLong' : ''
       ].join(' ')}
+
+      rules={inputRule}
       >
     <Input  
       disabled={inputInfo.readonly} 
