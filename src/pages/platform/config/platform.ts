@@ -72,7 +72,18 @@ const data = {
       level: 'ordinary', // 是否有特殊处理 样式单独处理
       tips: false, // true: label 会标红
       readonly: false // 是否 只读
-    }
+    },
+    {
+      type: 'date', // 类型
+      title: '受理日期',// 文字
+      name: 'slrq',// 键
+      value: '', // 值
+      format: '', //类型
+      dateType: '', // 日期范围
+      level: 'ordinary',// 是否有特殊处理 样式单独处理
+      tips: false,  // true: label 会标红
+      readonly: false // 是否 只读
+    },
 	],
 };
 

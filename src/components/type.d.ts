@@ -49,6 +49,8 @@ export interface inputOfFormData extends FormDataState {
   value: string
 }
 
-export interface dataOfFormdata extends FormDataState {
+export interface dateOfFormdata extends FormDataState {
   value: string
+  format?: any
+  dateType?: string | any
 }

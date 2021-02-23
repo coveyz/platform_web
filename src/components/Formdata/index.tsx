@@ -2,7 +2,8 @@ import './Formdata.scss'
 import React,{useState} from 'react'
 import { Form, Button } from 'antd';
 import {InputItem,SelectItem} from './Components'
-import {selectOfFormData,inputOfFormData,dataOfFormdata} from '@/components/type.d'
+import {selectOfFormData,inputOfFormData,dateOfFormdata} from '@/components/type.d'
+import DateItem from './Components/DateItem';
 
 
 const layout = {
@@ -21,7 +22,7 @@ const validateMessages = {
   },
 };
 
-type mainDataItem =  selectOfFormData | inputOfFormData | dataOfFormdata
+type mainDataItem =  selectOfFormData | inputOfFormData | dateOfFormdata
 
 export type  FormDaraState = {
   mainData:  Array<mainDataItem>
@@ -53,6 +54,7 @@ const Formdata:React.FC<FormDataProps> = (props) => {
       <Form {...layout} name="nest-messages" 
       initialValues={formModel}
       onFinish={onFinish}
+      className='formdata-frame'
       >
         {
           mainDataArr.map((item:mainDataItem,key:number) => {
@@ -61,8 +63,10 @@ const Formdata:React.FC<FormDataProps> = (props) => {
             }
             else if (item.type === 'select') {
               return <SelectItem key={key} selectInfo={item}/>
+            } 
+            else if (item.type === 'date') {
+              return <DateItem key={key} dateInfo={item}/>
             }
-            
             else {
               return
             }
