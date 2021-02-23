@@ -85,6 +85,7 @@ const data = {
       readonly: false // 是否 只读
     },
 	],
+  type: 'platform'
 };
 
 export default data;

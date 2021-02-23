@@ -2,7 +2,7 @@ import { UserState } from './reducers.d'
 import { getToken, removeToken } from '@/utils/auth'
 
 export type reducerStae = {
-  user: UserState
+  user: UserState,
 }
 
 export type ActionState = {

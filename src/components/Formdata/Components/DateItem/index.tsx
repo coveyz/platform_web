@@ -1,5 +1,6 @@
 import React from 'react'
 import { DatePicker, Form } from 'antd';
+import moment from 'moment';
 import {dateOfFormdata} from '@/components/type.d'
 
 export type DateItemProps = {
@@ -26,10 +27,9 @@ const DateItem:React.FC<DateItemProps> = (props) => {
       <DatePicker 
         onChange={onChange} 
         picker={dateInfo.dateType ? dateInfo.dateType : 'date'} 
-        format={dateInfo.format} 
+        format={dateInfo.format ? dateInfo.format : 'YYYY/MM/DD'} 
         placeholder={`请选择${dateInfo.title}`}
-      
-        />
+      />
       </Form.Item>
   )
 }

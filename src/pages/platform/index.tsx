@@ -5,10 +5,13 @@ import {buttonState,dropdownButtonState,operationGroupDialogState} from '@/compo
 import configData from '@/pages/platform/config/platform'
 import PlatformItem from './components/Item'
 import { Spin,Empty,Button } from 'antd';
+import {connect} from 'react-redux'
+import {integrationData} from '@/utils/tools'
 
-const Platform = () => {
+const Platform = (props: any) => {
   const [platformList,setplatformList] = useState([])
   const [loading,setloading] = useState(true)
+  const [optionObj,setOptionsObj] = useState({})
   const [dialogInfo,setDialogInfo] = useState({
     visible: false,
     title: '',
@@ -18,11 +21,9 @@ const Platform = () => {
 
   useEffect(() => {
     getInit()
-    return () => {
-      console.log('xxx')
-    }
+    return () => {}
   }, [])
-
+  //* 假 列表数据
   const getDataFromFakeInrterface = () => {
     return new Promise(resolve => {
 
@@ -69,17 +70,43 @@ const Platform = () => {
             title: '干部选拔任用工作纪实系统'
           },
         ]
-        resolve(datalist)
+        resolve({list: datalist})
       }, 1000);
 
     })
   }
+  //* 假 formdata 下拉数据等
+  const getDataFromFakeInterfaceOfFormData = () => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const data = [
+          {
+            value: 'male',
+            text: 'male'
+          },
+          {
+            value: 'female',
+            text: 'female'
+          },
+          {
+            value: 'other',
+            text: 'other'
+          }
+        ]
+        resolve({operation: {xfxs:data}})
+      }, 5000);
+    })
+
+  }
 
   const getInit = () => {
     setloading(true)
-    getDataFromFakeInrterface().then((res:any) => {
+    return Promise.all([getDataFromFakeInrterface(),getDataFromFakeInterfaceOfFormData()]).then(res => {
+      console.log('getInit',res)
+      const {list,operation} = integrationData(res)
       setloading(false)
-      setplatformList(res)
+      setplatformList(list)
+      setOptionsObj(operation)
     })
   }
   //* ButtonGroup 事件 🐹
@@ -135,7 +162,7 @@ const Platform = () => {
   }
           
   return (
-            <div className='platformManage-frame'>
+    <div className='platformManage-frame'>
       <ButtonGroup configData={configData} handleButtonOptions={handleButtonOptions}/>
 
       <div className="platform-wrapper">
@@ -162,11 +189,11 @@ const Platform = () => {
              
             })
           ),
-          content: dialogInfo.type === 'setting' ? <Transfer /> : <Formdata configData={configData}/>
+          content: dialogInfo.type === 'setting' ? <Transfer /> : <Formdata configData={configData} optionObj={optionObj}/>
         }}
       </Dialog>
     </div>
   )
 }
 
-export default Platform
+export default connect(state=>state)(Platform)

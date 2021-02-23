@@ -1,12 +1,13 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Select,Form } from 'antd';
-import {connect} from 'react-redux'
 import {selectOfFormData} from '@/components/type.d'
 const { Option } = Select;
 
 
+
 export type SelectItemProps = {
-  selectInfo: selectOfFormData
+  selectInfo: selectOfFormData,
+  optionObj?:any
 }
 
 function onGenderChange(value:any) {
@@ -14,7 +15,8 @@ function onGenderChange(value:any) {
 }
 
 const SelectItem:React.FC<SelectItemProps> = (props) => {
-  const {selectInfo} = props
+  const {selectInfo,optionObj} = props
+
   return (
     <Form.Item name={selectInfo.name} label={selectInfo.title} >
     <Select
@@ -22,13 +24,16 @@ const SelectItem:React.FC<SelectItemProps> = (props) => {
       onChange={onGenderChange}
       allowClear
     >
-      <Option value="male">male</Option>
-      <Option value="female">female</Option>
-      <Option value="other">other</Option>
+      {
+       optionObj[selectInfo.name] && optionObj[selectInfo.name].map((item:any,key:number) => {
+          return <Option key={key} value={item.value}>{item.text}</Option>
+        })
+      }
     </Select>
    </Form.Item>
 
   )
 }
+
 
 export default SelectItem
