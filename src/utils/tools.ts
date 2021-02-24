@@ -1,4 +1,4 @@
-import { message, Button } from 'antd';
+import { message } from 'antd';
 
 export const successMessage = (word: string) => {
   message.success(word);

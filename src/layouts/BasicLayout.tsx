@@ -1,7 +1,7 @@
 import './BasicLayout.scss'
 import {GlobalHeader,GlobalFooter} from '@/components'
 import { Layout } from 'antd';
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer, Content } = Layout;
 
 
 const BasicLayout = (props:any) => {

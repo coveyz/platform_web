@@ -1,10 +1,7 @@
 import {connect} from 'react-redux'
 
-type GlobalFooterProps = {
-  logout: () => void
-}
 
-const GlobalFooter:React.FC<GlobalFooterProps> = (props) => {
+const GlobalFooter:React.FC = (props:any) => {
   const {logout} = props
   const logoutOperation = () => {
     logout()

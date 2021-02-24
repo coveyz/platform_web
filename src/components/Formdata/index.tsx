@@ -1,5 +1,5 @@
 import './Formdata.scss'
-import React,{useState,useImperativeHandle,useEffect} from 'react'
+import React,{useState,useImperativeHandle} from 'react'
 import { Form } from 'antd';
 import {InputItem,SelectItem,DateItem} from './Components'
 import {selectOfFormData,inputOfFormData,dateOfFormdata} from '@/components/type.d'
@@ -28,7 +28,7 @@ export type  FormDataProps  = {
 
 const Formdata:React.FC<FormDataProps> = (props) => {
   const {configData,optionObj,clearItemArr} = props
-  const [mainDataArr,setMainDataArr] = useState(configData.mainData)
+  const [mainDataArr] = useState(configData.mainData)
   const [mainRules] = useState(configData.rule)
   
   //* 初始化 整合 formdata 数据🐥

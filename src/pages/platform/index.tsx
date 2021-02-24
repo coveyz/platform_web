@@ -1,4 +1,4 @@
-import React,{useEffect,useState,useRef,forwardRef} from 'react'
+import React,{useEffect,useState,useRef} from 'react'
 import './platform.scss'
 import {ButtonGroup,Dialog,Formdata,Transfer} from '@/components'
 import {buttonState,dropdownButtonState,operationGroupDialogState} from '@/components/type.d'

@@ -27,7 +27,7 @@ const config = (function (global, undefined) {
   /**
    * @description 平台的名称
    */
-  config.platformName = 'tf_platform_web'
+  config.platformName = 'tf_platform_manage_web'
   config.platformTitle = '干部监督综合管控平台'
 
   global.config = config

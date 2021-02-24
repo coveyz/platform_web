@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React from 'react'
 import { Select,Form } from 'antd';
 import {selectOfFormData} from '@/components/type.d'
 const { Option } = Select;

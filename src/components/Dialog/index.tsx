@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { Modal, Button } from 'antd';
-import {DialogState,operationGroupDialogState} from '@/components/type.d'
+import {DialogState} from '@/components/type.d'
 
 type DialogProps = {
   dialogInfo: DialogState
