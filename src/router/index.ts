@@ -1,3 +1,5 @@
+import {RouterConfig} from './type.d'
+
 import SecurityLayout from '@/layouts/SecurityLayout'
 import UserLayout from '@/layouts/UserLayout'
 import Login from '@/pages/user/login'
@@ -18,7 +20,8 @@ import UserStatus from '@/pages/system/user-status'
 
 
 
-export const routerMap = [
+
+export const routerMap:RouterConfig[] = [
   {
     path: '/user',
     component: UserLayout,
@@ -69,9 +72,9 @@ export const routerMap = [
               },
               {
                 path: '/system/menu',
-                name: Menu,
+                name: 'Menu',
                 component: Menu,
-                meta: {hidden: true,title: '菜单管理',icon: '',limie: ''}
+                meta: {hidden: true,title: '菜单管理',icon: '',limit: ''}
               },
               {
                 path: '/system/organization',

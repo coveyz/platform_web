@@ -1,9 +1,8 @@
 import './Formdata.scss'
 import React,{useState,useImperativeHandle,useEffect} from 'react'
 import { Form } from 'antd';
-import {InputItem,SelectItem} from './Components'
+import {InputItem,SelectItem,DateItem} from './Components'
 import {selectOfFormData,inputOfFormData,dateOfFormdata} from '@/components/type.d'
-import DateItem from './Components/DateItem';
 
 
 const layout = {

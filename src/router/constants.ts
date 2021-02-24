@@ -1,6 +1,8 @@
-export const constantsRouter = [
+import {constantsProps} from './type.d'
+export const constantsRouter:constantsProps[] = [
   {
     path: '/',
+    name: 'Home',
     title: '导航',
     limit: '',
     icon: "",
@@ -8,6 +10,7 @@ export const constantsRouter = [
   },
   {
     path: '/dashboard',
+    name: 'Dashboard',
     title: '导航',
     limit: '',
     icon: "",
@@ -15,6 +18,7 @@ export const constantsRouter = [
   },
   {
     path: '/platform',
+    name: 'Platform',
     title: '平台管理',
     limit: 'ptgl',
     icon: "platform",
@@ -22,6 +26,7 @@ export const constantsRouter = [
   },
   {
     path: '/system',
+    name: 'System',
     title: '系统管理',
     limit: 'xtgl',
     icon: "system",
@@ -30,14 +35,15 @@ export const constantsRouter = [
   {
     path: '/system/role',
     name: 'Role',
+    hidden: true,
     title: '用户管理',
     limit: '',
-    hidden: true
+    icon: '',
   },
   {
     path: '/system/menu',
     name: 'Menu',
-    hidden: true, title: '菜单管理', icon: '', limie: ''
+    hidden: true, title: '菜单管理', icon: '', limit: ''
   },
   {
     path: '/system/organization',
