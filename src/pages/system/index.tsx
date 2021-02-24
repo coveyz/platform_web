@@ -1,9 +1,10 @@
 import React from 'react'
 
-const system = () => {
+const system = (props:any) => {
   return (
     <div>
       systemsystemsystemsystemsystem
+      {props.children}
     </div>
   )
 }

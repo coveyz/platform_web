@@ -67,7 +67,7 @@ const data = {
       type: 'select',// 类型
       title: '信访形式', // 文字
       name: 'xfxs', // 键
-      value: 'male', // 值
+      value: '', // 值
       options: 'xfxs',  // 选项 // 针对 树,select 等
       level: 'ordinary', // 是否有特殊处理 样式单独处理
       tips: false, // true: label 会标红

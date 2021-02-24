@@ -50,7 +50,6 @@ const Formdata:React.FC<FormDataProps> = (props) => {
       return new Promise((resolve,reject) => {
         form.validateFields()
           .then((value) => {
-            console.log('>>>>>>',value)
             resolve(value)
           })
          .catch((err) => err)

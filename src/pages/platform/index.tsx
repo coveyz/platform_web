@@ -5,14 +5,14 @@ import {buttonState,dropdownButtonState,operationGroupDialogState} from '@/compo
 import config from '@/pages/platform/config/platform'
 import PlatformItem from './components/Item'
 import { Spin,Empty,Button } from 'antd';
-import {connect} from 'react-redux'
 import {integrationData} from '@/utils/tools'
 
-const Platform = (props: any) => {
+const Platform:React.FC = () => {
   const [configData,setConfigData] = useState(config)
   const [platformList,setplatformList] = useState([])
-  const [loading,setloading] = useState(true)
+  const [loading,setloading] = useState(true) 
   const [optionObj,setOptionsObj] = useState({})
+
   const [dialogInfo,setDialogInfo] = useState({
     visible: false,
     title: '',
@@ -21,7 +21,7 @@ const Platform = (props: any) => {
   })
 
   useEffect(() => {
-    getInit()
+     getInit()
     return () => {}
   }, [])
   //* 假 列表数据
@@ -95,7 +95,7 @@ const Platform = (props: any) => {
           }
         ]
         resolve({operation: {xfxs:data}})
-      }, 5000);
+      }, 1000);
     })
 
   }
@@ -110,6 +110,7 @@ const Platform = (props: any) => {
       setOptionsObj(operation)
     })
   }
+
   //* ButtonGroup 事件 🐹
   const handleButtonOptions = (buttonInfo:buttonState | dropdownButtonState) => {
     const {name} = buttonInfo
@@ -123,7 +124,7 @@ const Platform = (props: any) => {
   }
   //* 平台项 编辑/设置 操作
   const platformItemOptions = (item: any,type: string) => {
-    console.log('item=>',item,'type=>',type)
+    // console.log('item=>',item,'type=>',type)
     setDialogInfo({...dialogInfo,visible: true, title: type === 'setting'? '请选择用户': '修改平台',type: type})
   }
   //* 新增操作
@@ -159,8 +160,9 @@ const Platform = (props: any) => {
     setDialogInfo({...dialogInfo,visible: false})
   }
 
+  //* 确定操作
   const confirmOption = () => {
-    console.log('confire=>',childRef)
+    // console.log('confire=>',childRef)
     childRef['current']['verification']().then((res:any) => {
       console.log('confirmOption-callback',res)
       setDialogInfo({...dialogInfo,visible: false})
@@ -215,4 +217,4 @@ const Platform = (props: any) => {
   )
 }
 
-export default connect(state=>state)(Platform)
+export default Platform
