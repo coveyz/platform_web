@@ -1,5 +1,8 @@
 import store from '@/model'
+import { permissionList } from '@/api/user'
 // import { getRoutes } from '@/api/user'
+import { removeToken } from '@/utils/auth'
+import { errorMessage } from '@/utils/tools'
 
 // const getPermissionTabs = () => {
 //   return new Promise((resolve,reject) => {
@@ -24,11 +27,27 @@ import store from '@/model'
 
 const getPermissionTabs = () => {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const data = ['ptgl', 'xtgl']
-      store.dispatch({ type: 'SET_PERMISSIONTABS', payload: { permissionTabs: data } })
-      resolve(data)
-    }, 1000);
+    // setTimeout(() => {
+    //   const data = ['ptgl', 'xtgl']
+    //   store.dispatch({ type: 'SET_PERMISSIONTABS', payload: { permissionTabs: data } })
+    //   resolve(data)
+    // }, 1000);
+
+    permissionList().then(res => {
+      console.log('permissionList=>', res.data)
+
+      if (!res.data.data) {
+        reject("用户登录超时 请重新登录");
+      }
+      const { menuList } = res.data.data
+
+      if (!menuList || menuList.length <= 0) {
+        reject('当前凭证无任何权限,请联系管理员配置权限')
+      }
+
+      store.dispatch({ type: 'SET_PERMISSIONTABS', payload: { permissionTabs: [] } })
+      resolve(menuList)
+    })
 
   })
 }
@@ -43,7 +62,11 @@ export const getAuthority = async () => {
     try {
       Authority = await getPermissionTabs()
     } catch (error) {
-      window.location.replace('/user/loin')
+      errorMessage(error)
+      removeToken()
+      setTimeout(() => {
+       window.location.replace('/user/login')
+      }, 800);
     }
   }
   console.log('getAuthority=>', Authority)

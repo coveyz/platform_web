@@ -26,7 +26,7 @@ const EntryItem:React.FC<MenuProps> = (props) => {
   return (
     <Menu onClick={handleClick} selectedKeys={[entryKey]} mode="horizontal" className="qq">
         {
-          entranceItem.map((item,key) => {
+          entranceItem.map((item) => {
             return (
               <Menu.Item key={item.path}>
                 <Link to={item.path}>

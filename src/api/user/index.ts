@@ -16,10 +16,11 @@ export const logout = () => {
   });
 };
 
-export const permissionList = (requestData: any) => {
+export const permissionList = () => {
   return http({
     method: "POST",
-    data: requestData,
+    data: {},
     url: `/api/home/listMenu`
   });
 };
+

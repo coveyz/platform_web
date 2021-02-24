@@ -1,14 +1,9 @@
 import './HeaderBar.scss'
-import {constantsProps} from '@/router/type.d'
-import { Menu } from 'antd';
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import {SvgIcons} from '@/components'
-import React, { useState, useEffect } from 'react'
-const { SubMenu } = Menu;
-
-
-
-
+import { SvgIcons } from '@/components'
+import { constantsProps } from '@/router/type.d'
+import { Menu } from 'antd';
 
 export type HeaderBarProps = {
   routerMap: constantsProps[]

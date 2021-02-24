@@ -24,6 +24,7 @@ class SecurityLayout extends Component<SecurityLayoutProps> {
 
    async getPermission(){
     const {token} = this.props
+    console.log('window.location.pathname=>',window.location.pathname)
     if (token && window.location.pathname !== '/user/login') {
       const permissionTabs = await getAuthority()
       console.log(permissionTabs)
@@ -57,31 +58,33 @@ class SecurityLayout extends Component<SecurityLayoutProps> {
       />
     );
 
-    if (!token && window.location.pathname !== '/user/login') {
+    if (!token ) {
+      console.log('!token')
       return <Redirect to={`/user/login?`} />;
-    } 
-    
-    if (permisisontTabs && permisisontTabs.length === 0) {
-      return (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems:'center'
-          }}
-        >
-          <Spin size="large" />
-        </div> 
-      ) 
     } else {
-      const {pathname} = window.location
-      const curRouterInfo = constantsRouter.filter(router => router.path === pathname)[0]
-      if (!curRouterInfo) return noMatch
-      document.title = '干部监督综合管控平台'
-      return children
+      if (!permisisontTabs || permisisontTabs.length === 0 ) {
+        return (
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems:'center'
+            }}
+          >
+            <Spin size="large" />
+          </div> 
+        ) 
+      } else {
+        const {pathname} = window.location
+        const curRouterInfo = constantsRouter.filter(router => router.path === pathname)[0]
+        if (!curRouterInfo) return noMatch
+        document.title = '干部监督综合管控平台'
+        return children
+      }
     }
+
   }
 }
 
