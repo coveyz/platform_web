@@ -18,7 +18,7 @@ const EntryItem:React.FC<MenuProps> = (props) => {
   const entranceItem = constantsRouter.filter(item => entranceKey.includes(item.title))
 
   const {entryKey,setEntryKeyOptions} = props
-  
+
   const handleClick = (e:any) => {
     setEntryKeyOptions(e.key)
   };

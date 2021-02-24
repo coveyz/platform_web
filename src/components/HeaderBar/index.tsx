@@ -3,7 +3,9 @@ import {constantsProps} from '@/router/type.d'
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom'
 import {SvgIcons} from '@/components'
+import React, { useState, useEffect } from 'react'
 const { SubMenu } = Menu;
+
 
 
 
@@ -13,9 +15,17 @@ export type HeaderBarProps = {
 }
 
 const HeaderBar:React.FC<HeaderBarProps> = (props) => {
+
   const {routerMap} = props
+  const [entryKey,setEntryKeyOptions] = useState(window.location.pathname)
+
+  //* 点击事件 🚚
+  const handleClick = (e:any) => {
+    setEntryKeyOptions(e.key)
+  }
+
   return (
-    <Menu mode="horizontal" className='HeaderBar'>
+    <Menu mode="horizontal" selectedKeys={[entryKey]} className='HeaderBar' onClick={handleClick}>
       {
         routerMap.map((item:constantsProps) => {
           if (!item.hidden) {
