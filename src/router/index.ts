@@ -83,10 +83,10 @@ export const routerMap:RouterConfig[] = [
                 meta: {hidden: true,title: '机构管理',icon: '',limit: ''}
               },
               {
-                path: '/system/organization',
-                name: 'Role',
-                component: Organization,
-                meta: {hidden: true,title: '角色管理',icon: '',limit: ''}
+                path: '/system/journal',
+                name: 'Journal',
+                component: Journal,
+                meta: {hidden: true,title: '日志审计',icon: '',limit: ''}
               },
               {
                 path: '/system/rolegroup',

@@ -35,39 +35,40 @@ export const constantsRouter:constantsProps[] = [
   {
     path: '/system/role',
     name: 'Role',
-    hidden: true,
-    title: '用户管理',
-    limit: '',
-    icon: '',
-  },
-  {
-    path: '/system/menu',
-    name: 'Menu',
-    hidden: true, title: '菜单管理', icon: '', limit: ''
-  },
-  {
-    path: '/system/organization',
-    name: 'Organization',
-    hidden: true, title: '机构管理', icon: '', limit: ''
-  },
-  {
-    path: '/system/role',
-    name: 'Role',
-    hidden: true, title: '角色管理', icon: '', limit: ''
+    title: '角色管理', icon: 'role', limit: ''
   },
   {
     path: '/system/rolegroup',
     name: 'Organization',
-    hidden: true, title: '角色组管理', icon: '', limit: ''
+    title: '角色组管理', icon: 'rolegroup', limit: ''
+  },
+  {
+    path: '/system/organization',
+    name: 'Organization',
+    title: '机构管理', icon: 'organization', limit: ''
   },
   {
     path: '/system/user',
-    name: 'User',
-    hidden: true, title: '用户管理', icon: '', limit: ''
+    name: 'Role',
+    title: '用户管理',
+    limit: '',
+    icon: 'user',
   },
   {
     path: '/system/userstatus',
     name: 'UserStatus',
-    hidden: true, title: '用户状态管理', icon: '', limit: ''
-  }
+    title: '用户状态管理', icon: 'userstatus', limit: ''
+  },
+  {
+    path: '/system/journal',
+    name: 'Journal',
+    title: '日志审计',
+    limit: '',
+    icon: 'journal',
+  },
+  {
+    path: '/system/menu',
+    name: 'Menu',
+    title: '菜单管理', icon: 'menu', limit: ''
+  },
 ]

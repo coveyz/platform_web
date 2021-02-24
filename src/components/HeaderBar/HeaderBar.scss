@@ -1,0 +1,46 @@
+@import '@/styles/variables';
+.HeaderBar {
+  background-color: $global-header-color;
+  height: $global-header + px !important;
+  line-height: $global-header + px !important;
+  display: flex;
+  justify-content: flex-end;
+  a {
+    padding: 0 10px;
+  }
+  .ant-menu {
+    background-color: transparent;
+  }
+
+  .ant-menu-item-selected {
+    border-bottom: 2px solid transparent !important;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .ant-menu-item-selected:hover {
+    border-bottom: 2px solid transparent !important;
+  }
+
+  .ant-menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-bottom: 2px solid transparent !important;
+  }
+
+  .ant-menu-item-selected a {
+    color: #fff !important;
+  }
+
+  .ant-menu-item a {
+    color: #fff !important;
+    border-bottom: 2px solid transparent;
+  }
+
+  .ant-menu-item a:hover {
+    color: #fff !important;
+    border-bottom: 2px solid transparent;
+  }
+
+  .ant-menu-item {
+    margin: 0px 5px!important;
+  }
+}
