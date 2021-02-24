@@ -35,21 +35,17 @@ class SecurityLayout extends Component<SecurityLayoutProps> {
     }
   }
 
-  back() {
-    window.history.back()
-  }
-
   render() {
     const {permisisontTabs}  = this.state
     const {children,token} = this.props
     const back = () => {
-      window.history.back()
+      window.history.go(-1)
     }
     const noMatch = (
       <Result
         status={404}
         title="404"
-        subTitle="Sorry, you are not authorized to access this page."
+        subTitle="抱歉，您访问的页面不存在"
         extra={
           <Button type="primary" onClick={back}>
            返回
@@ -57,6 +53,19 @@ class SecurityLayout extends Component<SecurityLayoutProps> {
         }
       />
     );
+
+    const invalid = (
+      <Result
+        status={403}
+        title="403"
+        subTitle="抱歉，您无权访问此页。"
+        extra={
+          <Button type="primary" onClick={back}>
+          返回
+          </Button>
+        }
+      />
+    )
 
     if (!token ) {
       console.log('!token')
@@ -80,8 +89,14 @@ class SecurityLayout extends Component<SecurityLayoutProps> {
         const {pathname} = window.location
         const curRouterInfo = constantsRouter.filter(router => router.path === pathname)[0]
         if (!curRouterInfo) return noMatch
-        document.title = '干部监督综合管控平台'
-        return children
+        if (curRouterInfo.limit && permisisontTabs.indexOf(curRouterInfo.limit) === -1) {
+          console.log('没有权限')
+          return invalid
+        } else {
+          console.log('有权限')
+          document.title = '干部监督综合管控平台'
+          return children
+        }
       }
     }
 

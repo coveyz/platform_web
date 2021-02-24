@@ -24,14 +24,13 @@ const collector = (state = { ...reducers }, action: ActionState) => {
     //* 保存 权限表
     case 'SET_PERMISSIONTABS':
       state['user']['permissionTabs'] = action.payload.permissionTabs
-      console.log('per=>', state)
+      // console.log('per=>', state)
       return state
     //* 退出登录
     case 'LOGOUT':
       state['user']['token'] = ''
       state['user']['permissionTabs'] = []
       removeToken()
-      action.payload.resolve()
       return state
     default:
       break;

@@ -1,7 +1,7 @@
 import queryString from "query-string";
 import { setToken, setUserInfo } from '@/utils/auth'
 import { takeEvery, call, put } from "redux-saga/effects";
-import { login } from '@/api/user'
+import { login, logout } from '@/api/user'
 
 //* 整合登录数据🚒
 const integrationOfLogin = (loginData: any) => {
@@ -44,6 +44,13 @@ const UserServer = {
       })
     })
   },
+  logout: () => {
+    return new Promise(resolve => {
+      logout().then(() => {
+        resolve(true)
+      })
+    })
+  }
 }
 
 function* loginHandle(action: any) {
@@ -55,9 +62,16 @@ function* loginHandle(action: any) {
   window.location.replace(url)
 }
 
+function* logoutHandle() {
+  yield call(UserServer.logout)
+  yield put({ type: 'LOGOUT' })
+  window.location.replace('/user/login')
+}
+
 
 function* UserSaga() {
   yield takeEvery('login', loginHandle)
+  yield takeEvery('logout', logoutHandle)
 }
 
 export default UserSaga
