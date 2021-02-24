@@ -1,6 +1,7 @@
 import http from '@/utils/request'
+import { loginRequestState } from './type.d'
 
-export const login = (requestData: any) => {
+export const login = (requestData: loginRequestState) => {
   return http({
     method: 'POST',
     data: requestData,
