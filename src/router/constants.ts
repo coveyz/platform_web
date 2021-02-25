@@ -20,7 +20,7 @@ export const constantsRouter:constantsProps[] = [
     path: '/platform',
     name: 'Platform',
     title: '平台管理',
-    limit: 'ptgl',
+    limit: '',
     icon: "platform",
     hidden: true
   },

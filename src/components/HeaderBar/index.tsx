@@ -13,7 +13,8 @@ export type HeaderBarProps = {
 
 const HeaderBar:React.FC<HeaderBarProps> = (props) => {
 
-  const {routerMap,permissonTabs} = props
+  // const {routerMap,permissonTabs} = props
+  const {routerMap} = props
   const [entryKey,setEntryKeyOptions] = useState(window.location.pathname)
 
   //* 点击事件 🚚
@@ -36,7 +37,7 @@ const HeaderBar:React.FC<HeaderBarProps> = (props) => {
               </Menu.Item>
             )
           } else {
-            return
+            return <></>
           }
         })
       }

@@ -81,7 +81,7 @@ const Formdata:React.FC<FormDataProps> = (props) => {
             return <DateItem key={key} dateInfo={item} dateRule={mainRules[item.name] ?mainRules[item.name] : null }/>
           }
           else {
-            return
+            return 
           }
         })
       }

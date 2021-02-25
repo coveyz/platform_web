@@ -1,79 +1,47 @@
 import React,{useEffect,useState,useRef} from 'react'
+import {Redirect} from 'react-router-dom'
 import './platform.scss'
-import {ButtonGroup,Dialog,Formdata,Transfer} from '@/components'
-import {buttonState,dropdownButtonState,operationGroupDialogState} from '@/components/type.d'
-import config from '@/pages/platform/config/platform'
-import PlatformItem from './components/Item'
 import { Spin,Empty,Button } from 'antd';
+import {buttonState,dropdownButtonState,operationGroupDialogState} from '@/components/type.d'
+import {getPlatformList,handlePlatformOperation} from '@/api/platform'
 import {integrationData} from '@/utils/tools'
+import config from '@/pages/platform/config/platform'
+import {ButtonGroup,Formdata,Transfer} from '@/components'
+import PlatformItem from './components/Item'
 
-const Platform:React.FC = () => {
+
+type PlatformProps = {
+  history: any
+}
+
+const Platform:React.FC<PlatformProps> = (props) => {
   const [configData,setConfigData] = useState(config)
   const [platformList,setplatformList] = useState([])
   const [loading,setloading] = useState(true) 
-  const [optionObj,setOptionsObj] = useState({})
+  // const [optionObj,setOptionsObj] = useState({})
 
-  const [dialogInfo,setDialogInfo] = useState({
-    visible: false,
-    title: '',
-    type: '',
-    isOption: true
-  })
+  // const [dialogInfo,setDialogInfo] = useState({
+  //   visible: false,
+  //   title: '',
+  //   type: '',
+  //   isOption: true
+  // })
 
   useEffect(() => {
-     getInit()
+    getInit() 
     return () => {}
   }, [])
-  //* 假 列表数据
-  const getDataFromFakeInrterface = () => {
+  //* 获取列表操作
+  const getPlatformListOperation = () => {
     return new Promise(resolve => {
-
-      setTimeout(() => {
-        const datalist: any =  [
-          {
-            icon: 'platform',
-            title: '干部选拔任用工作纪实系统'
-          },
-          {
-            icon: 'platform',
-            title: '干部监督工作联席会议系统'
-          },
-          {
-            icon: 'platform',
-            title: '经济责任审计和自然资源审计'
-          },
-          {
-            icon: 'platform',
-            title: '选人用人专项检查'
-          },
-          {
-            icon: 'platform',
-            title: '工作纪实系统'
-          },
-          {
-            icon: 'platform',
-            title: '查询分析'
-          },
-          {
-            icon: 'platform',
-            title: '干部选拔任用工作纪实系统'
-          },
-          {
-            icon: 'platform',
-            title: '干部选拔任用工作纪实系统'
-          },
-          {
-            icon: 'platform',
-            title: '干部选拔任用工作纪实系统'
-          },
-          {
-            icon: 'platform',
-            title: '干部选拔任用工作纪实系统'
-          },
-        ]
-        resolve({list: datalist})
-      }, 1000);
-
+      const requestData = {
+        clientName: '',
+        clientId: ''
+      }
+      getPlatformList(requestData).then(res => {
+        const {records} = res.data.data
+        resolve({list: records})
+      })
     })
   }
   //* 假 formdata 下拉数据等
@@ -102,12 +70,11 @@ const Platform:React.FC = () => {
 
   const getInit = () => {
     setloading(true)
-    return Promise.all([getDataFromFakeInrterface(),getDataFromFakeInterfaceOfFormData()]).then(res => {
-      // console.log('getInit',res)
+    return Promise.all([getPlatformListOperation(),getDataFromFakeInterfaceOfFormData()]).then(res => {
       const {list,operation} = integrationData(res)
       setloading(false)
       setplatformList(list)
-      setOptionsObj(operation)
+      // setOptionsObj(operation)
     })
   }
 
@@ -125,11 +92,12 @@ const Platform:React.FC = () => {
   //* 平台项 编辑/设置 操作
   const platformItemOptions = (item: any,type: string) => {
     // console.log('item=>',item,'type=>',type)
-    setDialogInfo({...dialogInfo,visible: true, title: type === 'setting'? '请选择用户': '修改平台',type: type})
+    // setDialogInfo({...dialogInfo,visible: true, title: type === 'setting'? '请选择用户': '修改平台',type: type})
   }
   //* 新增操作
   const addOptions = () => {
-    setDialogInfo({...dialogInfo,visible: true, title: '新增平台',type: 'add'})
+    // props.history.push('/')
+    // setDialogInfo({...dialogInfo,visible: true, title: '新增平台',type: 'add'})
   }
 
   //* 平台操作 - 删除/关闭/确定
@@ -152,20 +120,19 @@ const Platform:React.FC = () => {
   }
 
   const deleteOption = () => {
-    setDialogInfo({...dialogInfo,visible: false})
+    // setDialogInfo({...dialogInfo,visible: false})
   }
 
   const cancelOption = () => {
     childRef['current']['reset']()
-    setDialogInfo({...dialogInfo,visible: false})
+    // setDialogInfo({...dialogInfo,visible: false})
   }
 
   //* 确定操作
   const confirmOption = () => {
-    // console.log('confire=>',childRef)
     childRef['current']['verification']().then((res:any) => {
       console.log('confirmOption-callback',res)
-      setDialogInfo({...dialogInfo,visible: false})
+      // setDialogInfo({...dialogInfo,visible: false})
     })
 
   }
@@ -193,12 +160,12 @@ const Platform:React.FC = () => {
         }
       </div>
 
-      <Dialog dialogInfo={dialogInfo}  >
+      {/* <Dialog dialogInfo={dialogInfo}  >
         {{
           operationGroup: (
             configData.operationGroupOfDialog.map((item:operationGroupDialogState,key:number) => {
               if (item.name === 'delete' && dialogInfo.type !== 'edit') {
-                return
+                return <i key={key}></i>
               } else {
                 return (
                   <Button  type={item.type} key={key} onClick={()=> handlePlatformOption(item)}>
@@ -212,7 +179,7 @@ const Platform:React.FC = () => {
          
           content: dialogInfo.type === 'setting' ? <Transfer /> : <Formdata cRef={childRef} clearItemArr={clearItemArr}   configData={configData} optionObj={optionObj} />
         }}
-      </Dialog>
+      </Dialog> */}
     </div>
   )
 }

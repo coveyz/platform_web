@@ -49,7 +49,10 @@ const ButtonGroup:React.FC<ButtonGroupProps> = (props) => {
           //* 线性 button 样式
           if (button.buttonType === 'button' || button.buttonType === 'linearButton') {
             return <Button className={button.buttonType === 'button' ? 'button-item' : 'button-linearButton-item'} onClick={() => handleOperation(button)} key={key} disabled={!button.special} type={button.type} icon={button.icon ? <SvgIcons iconClass={button.icon}/> : null}>{button.title}</Button>
-          }
+          } 
+          // else if (button.buttonType === 'link') {
+          //   return <Button className={button.buttonType === 'button' ? 'button-item' : 'button-linearButton-item'} onClick={() => handleOperation(button)} key={key} disabled={!button.special} type={button.type} icon={button.icon ? <SvgIcons iconClass={button.icon}/> : null}>{button.title}</Button>
+          // }
           //* 基础 下拉 button 样式
           else if (button.buttonType === 'dropdownButton') {
             return (
@@ -62,7 +65,7 @@ const ButtonGroup:React.FC<ButtonGroupProps> = (props) => {
             )
           } 
           else {
-            return <></>
+            return 
           }
         })
       }

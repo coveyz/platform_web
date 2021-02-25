@@ -27,7 +27,7 @@ const platformItem:React.FC<PlatformProps> = (props) => {
                 <div className="icon">
                   <SvgIcons iconClass='platformItem'/>
                 </div>
-                <div className="platformName"> {item.title} </div>
+                <div className="platformName"> {item.clientName} </div>
                 <div className="action" >
                   <i onClick={() => handleOptions(item,'edit')}>
                     <SvgIcons iconClass='edit' />
