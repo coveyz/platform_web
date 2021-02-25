@@ -1,5 +1,4 @@
-import {RouterConfig} from '../type.d'
-
+import {RouterConfig} from '@/router/type.d'
 import System from '@/pages/system'
 /** ✨ System ✨ */
 import Journal from '@/pages/system/journal'

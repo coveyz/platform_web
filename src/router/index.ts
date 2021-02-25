@@ -7,8 +7,8 @@ import Login from '@/pages/user/login'
 import BasicLayout from '@/layouts/BasicLayout'
 import Dashboard from '@/pages/dashboard'
 
-import Platform from './modules/platform'
-import System from './modules/system'
+import Platform from './modules/Router/platform'
+import System from './modules/Router/system'
 
 export const routerMap: RouterConfig[] = [
   {
