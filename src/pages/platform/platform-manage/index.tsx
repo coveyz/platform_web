@@ -17,14 +17,6 @@ const Platform:React.FC<PlatformProps> = (props) => {
   const [configData,setConfigData] = useState(config)
   const [platformList,setplatformList] = useState([])
   const [loading,setloading] = useState(true) 
-  // const [optionObj,setOptionsObj] = useState({})
-
-  // const [dialogInfo,setDialogInfo] = useState({
-  //   visible: false,
-  //   title: '',
-  //   type: '',
-  //   isOption: true
-  // })
 
   useEffect(() => {
     getInit() 
@@ -38,42 +30,17 @@ const Platform:React.FC<PlatformProps> = (props) => {
         clientId: ''
       }
       getPlatformList(requestData).then(res => {
-        const {records} = res.data.data
-        resolve({list: records})
+        const {records} = res.data.data 
+        resolve(records)
       })
     })
-  }
-  //* 假 formdata 下拉数据等
-  const getDataFromFakeInterfaceOfFormData = () => {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        const data = [
-          {
-            value: 'male',
-            text: 'male'
-          },
-          {
-            value: 'female',
-            text: 'female'
-          },
-          {
-            value: 'other',
-            text: 'other'
-          }
-        ]
-        resolve({operation: {xfxs:data}})
-      }, 1000);
-    })
-
   }
 
   const getInit = () => {
     setloading(true)
-    return Promise.all([getPlatformListOperation(),getDataFromFakeInterfaceOfFormData()]).then(res => {
-      const {list,operation} = integrationData(res)
+    getPlatformListOperation().then((list) => {
       setloading(false)
-      setplatformList(list)
-      // setOptionsObj(operation)
+      setplatformList(list as [])
     })
   }
 
@@ -100,25 +67,6 @@ const Platform:React.FC<PlatformProps> = (props) => {
     props.history.push('/platform/create')
     // setDialogInfo({...dialogInfo,visible: true, title: '新增平台',type: 'add'})
   }
-
-  // //* 平台操作 - 删除/关闭/确定
-  // const handlePlatformOption = (item: operationGroupDialogState) => {
-  //   console.log('操作',item)
-  //   const {name} = item
-  //   switch (name) {
-  //     case 'delete':
-  //       deleteOption()
-  //       break;
-  //     case 'cancel':
-  //       cancelOption()
-  //       break;   
-  //     case 'confirm':
-  //       confirmOption()
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }
 
   const deleteOption = () => {
     // setDialogInfo({...dialogInfo,visible: false})
@@ -160,27 +108,6 @@ const Platform:React.FC<PlatformProps> = (props) => {
           : <Spin size="large"  className="example"/>
         }
       </div>
-
-      {/* <Dialog dialogInfo={dialogInfo}  >
-        {{
-          operationGroup: (
-            configData.operationGroupOfDialog.map((item:operationGroupDialogState,key:number) => {
-              if (item.name === 'delete' && dialogInfo.type !== 'edit') {
-                return <i key={key}></i>
-              } else {
-                return (
-                  <Button  type={item.type} key={key} onClick={()=> handlePlatformOption(item)}>
-                    {item.title}
-                  </Button>
-                )
-              }
-             
-            })
-          ),
-         
-          content: dialogInfo.type === 'setting' ? <Transfer /> : <Formdata cRef={childRef} clearItemArr={clearItemArr}   configData={configData} optionObj={optionObj} />
-        }}
-      </Dialog> */}
     </div>
   )
 }

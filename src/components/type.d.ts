@@ -26,13 +26,13 @@ export type DialogState = {
 export type operationGroupDialogState = {
   title: string
   name: string,
-  type?:string | any
+  type?: string | any
 }
 
 
- //* FormData typescript
+//* FormData typescript
 export interface FormDataState {
-  title: string 
+  title: string
   name: string
   type: string
   level: string
@@ -42,7 +42,6 @@ export interface FormDataState {
 
 export interface selectOfFormData extends FormDataState {
   value: string
-  options?: string
 }
 
 export interface inputOfFormData extends FormDataState {
@@ -53,4 +52,10 @@ export interface dateOfFormdata extends FormDataState {
   value: string
   format?: any
   dateType?: string | any
+}
+
+
+export interface radioFormdata extends FormDataState {
+  value: string
+  operations?: any[]
 }

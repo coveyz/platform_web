@@ -1,12 +1,12 @@
 import './Formdata.scss'
 import React,{useState,useImperativeHandle} from 'react'
 import { Form } from 'antd';
-import {InputItem,SelectItem,DateItem} from './Components'
+import {InputItem,SelectItem,DateItem,RadioItem} from './Components'
 import {selectOfFormData,inputOfFormData,dateOfFormdata} from '@/components/type.d'
 
 
 const layout = {
-  labelCol: { span: 8 },
+  labelCol: { span: 5 },
   wrapperCol: { span: 16 },
 };
 
@@ -14,20 +14,20 @@ type mainDataItem =  selectOfFormData | inputOfFormData | dateOfFormdata
 
 export type  FormDaraState = {
   mainData:  Array<mainDataItem>
-  type: string,
   rule: any
 }
 
 export type  FormDataProps  = {
   configData: FormDaraState
   optionObj?: any 
-  cRef: any
+  cRef?: any
   clearItemArr?: any
+  formDataType?: string
 }
 
 
 const Formdata:React.FC<FormDataProps> = (props) => {
-  const {configData,optionObj,clearItemArr} = props
+  const {configData,optionObj,clearItemArr,formDataType} = props
   const [mainDataArr] = useState(configData.mainData)
   const [mainRules] = useState(configData.rule)
   
@@ -62,12 +62,13 @@ const Formdata:React.FC<FormDataProps> = (props) => {
       }, 0);
     }
   }));
-
+  // formDataType
   return (
     <Form {...layout} name="nest-messages" 
       initialValues={formModel}
       form={form}
-      className='formdata-frame'
+      // className='formdata-frame'
+      className={['formdata-fram',formDataType ? formDataType : ''].join(' ')}
     >
       {
         mainDataArr.map((item:mainDataItem,key:number) => {
@@ -79,6 +80,9 @@ const Formdata:React.FC<FormDataProps> = (props) => {
           } 
           else if (item.type === 'date') {
             return <DateItem key={key} dateInfo={item} dateRule={mainRules[item.name] ?mainRules[item.name] : null }/>
+          }
+          else if (item.type === 'radio') {
+            return <RadioItem  key={key} radioInfo={item} radioRule={mainRules[item.name] ?mainRules[item.name] : null }/>
           }
           else {
             return 

@@ -1,19 +1,42 @@
 @import '@/styles/variables';
+
+.tipsStyle {
+	label {
+		color: $formdata-specialTips-color;
+	}
+}
+
+.textSoLong {
+	label {
+		line-height: 20px;
+	}
+}
+
 .formdata-frame {
-  .tipsStyle {
-    label {
-      color: $formdata-specialTips-color;
-    }
-  }
-  
-  .textSoLong {
-    label {
-      line-height: 20px;
-    }
-  }
-  
-  
-  .ant-picker {
-    width: 100%;
-  }
+	.ant-picker {
+		width: 100%;
+	}
+}
+
+// 列表
+.dataformList {
+	width: 60%;
+	.ant-form-item-label {
+		height: 32px;
+		background-color: $formdata-list-backgroundColor;
+		text-align: center;
+	}
+	.ant-picker {
+		width: 100%;
+	}
+
+	.new-radio-item {
+		.ant-form-item-control {
+			background-color: #fff;
+			box-sizing: border-box;
+			padding-left: 5px;
+			border-color: #d9d9d9;
+			border-radius: 2px;
+		}
+	}
 }
