@@ -11,7 +11,6 @@ const BasicLayout = (props:any) => {
         <GlobalHeader />
       </Header>
       <Content className="laylut-contain-content">
-          {/* BasicLayoutBasicLayoutBasicLayoutBasicLayoutBasicLayout */}
           {props.children}
       </Content>
       <Footer className="layout-contain-footer">

@@ -16,6 +16,22 @@ const platformConstants:constantsProps[] = [
     icon: 'role',
     limit: ''
   },
+  {
+    path: '/platform/create',
+    name: 'PlatformManage',
+    title: '新增平台管理页', 
+    icon: 'role',
+    limit: '',
+    hidden: true
+  },
+  {
+    path: '/platform/edit',
+    name: 'PlatformManage',
+    title: '编辑平台管理页', 
+    icon: 'role',
+    limit: '',
+    hidden: true
+  },
 ]
 
 export default platformConstants

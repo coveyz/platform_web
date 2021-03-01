@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, } from 'react-router-dom'
 import { Result, Button,Spin } from 'antd';
 import {connect} from 'react-redux'
 import {constantsRouter} from '@/router/constants'
@@ -87,7 +87,10 @@ class SecurityLayout extends Component<SecurityLayoutProps> {
         ) 
       } else {
         const {pathname} = window.location
-        const curRouterInfo = constantsRouter.filter(router => router.path === pathname)[0]
+        const curRouterInfo = constantsRouter.filter(router => {
+          return pathname.indexOf(router.path) > -1
+        })[0]
+        
         if (!curRouterInfo) return noMatch
         if (curRouterInfo.limit && permisisontTabs.indexOf(curRouterInfo.limit) === -1) {
           console.log('没有权限')

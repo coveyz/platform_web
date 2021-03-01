@@ -1,12 +1,11 @@
 import React,{useEffect,useState,useRef} from 'react'
-import {Redirect} from 'react-router-dom'
 import './platform.scss'
-import { Spin,Empty,Button } from 'antd';
+import { Spin,Empty } from 'antd';
 import {buttonState,dropdownButtonState,operationGroupDialogState} from '@/components/type.d'
-import {getPlatformList,handlePlatformOperation} from '@/api/platform'
+import {getPlatformList} from '@/api/platform'
 import {integrationData} from '@/utils/tools'
 import config from '@/pages/platform/config/platform'
-import {ButtonGroup,Formdata,Transfer} from '@/components'
+import {ButtonGroup} from '@/components'
 import PlatformItem from './components/Item'
 
 
@@ -96,28 +95,30 @@ const Platform:React.FC<PlatformProps> = (props) => {
   }
   //* 新增操作
   const addOptions = () => {
-    // props.history.push('/')
+    console.log('新增')
+    // {pathname:`/demo/${this.state.id}/${this.state.name}`}
+    props.history.push('/platform/create')
     // setDialogInfo({...dialogInfo,visible: true, title: '新增平台',type: 'add'})
   }
 
-  //* 平台操作 - 删除/关闭/确定
-  const handlePlatformOption = (item: operationGroupDialogState) => {
-    console.log('操作',item)
-    const {name} = item
-    switch (name) {
-      case 'delete':
-        deleteOption()
-        break;
-      case 'cancel':
-        cancelOption()
-        break;   
-      case 'confirm':
-        confirmOption()
-        break;
-      default:
-        break;
-    }
-  }
+  // //* 平台操作 - 删除/关闭/确定
+  // const handlePlatformOption = (item: operationGroupDialogState) => {
+  //   console.log('操作',item)
+  //   const {name} = item
+  //   switch (name) {
+  //     case 'delete':
+  //       deleteOption()
+  //       break;
+  //     case 'cancel':
+  //       cancelOption()
+  //       break;   
+  //     case 'confirm':
+  //       confirmOption()
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
 
   const deleteOption = () => {
     // setDialogInfo({...dialogInfo,visible: false})
@@ -137,13 +138,13 @@ const Platform:React.FC<PlatformProps> = (props) => {
 
   }
 
-  const clearItemArr = () => {
-    configData['mainData'] = configData['mainData'].map((item:any) => {
-      item.value = Array.isArray(item.value) ? [] : ''
-      return item
-    })
-    setConfigData(configData)
-  }
+  // const clearItemArr = () => {
+  //   configData['mainData'] = configData['mainData'].map((item:any) => {
+  //     item.value = Array.isArray(item.value) ? [] : ''
+  //     return item
+  //   })
+  //   setConfigData(configData)
+  // }
 
   const childRef = useRef<any>(null)
 
