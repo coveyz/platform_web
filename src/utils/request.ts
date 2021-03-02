@@ -1,6 +1,6 @@
 import axios from 'axios'
 import store from '@/model'
-import { getToken } from '@/utils/auth'
+import { getToken, removeToken, removeUserInfo } from '@/utils/auth'
 import { errorMessage } from '@/utils/tools'
 
 const http = axios.create({})
@@ -26,6 +26,14 @@ http.interceptors.response.use(
     return response
   },
   (error) => {
+    if (error.response && error.response.status === 401) {
+      errorMessage('用户登录超时 请重新登录')
+      setTimeout(() => {
+        removeToken()
+        removeUserInfo()
+        window.location.replace('/user/login')
+      }, 500);
+    }
     errorMessage(error)
     return Promise.reject(error)
   }

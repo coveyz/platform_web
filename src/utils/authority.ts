@@ -1,6 +1,6 @@
 import store from '@/model'
 import { permissionList } from '@/api/user'
-import { removeToken } from '@/utils/auth'
+import { removeToken, removeUserInfo } from '@/utils/auth'
 import { errorMessage } from '@/utils/tools'
 
 const getPermissionTabs = () => {
@@ -36,8 +36,9 @@ export const getAuthority = async () => {
     } catch (error) {
       errorMessage(error)
       removeToken()
+      removeUserInfo()
       setTimeout(() => {
-       window.location.replace('/user/login')
+        window.location.replace('/user/login')
       }, 500);
     }
   }
