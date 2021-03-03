@@ -59,3 +59,9 @@ export interface radioFormdata extends FormDataState {
   value: string
   operations?: any[]
 }
+
+export interface enclosureData extends FormDataState {
+  value: any
+  fileNumber?: number
+  fileList?: any[]
+}

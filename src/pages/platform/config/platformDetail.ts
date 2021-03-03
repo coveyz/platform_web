@@ -10,6 +10,17 @@ const data = {
       readonly: false, // 是否 只读
     },
     {
+      type: 'enclosure', // 类型
+      title: '相关附件', // 文字
+      name: 'xxx', // 键
+      value: [], // 值
+      fileNumber: 0, // 文件名
+      fileList: [], // 文件列表
+      level: 'ordinary', // 是否有特殊处理 样式单独处理
+      tips: false, // true: label 会标红
+      readonly: false // 是否 只读
+    },
+    {
       type: 'radio',
       title: '是否启用',
       name: 'sfkj',

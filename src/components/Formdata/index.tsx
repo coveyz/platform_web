@@ -1,8 +1,8 @@
 import './Formdata.scss'
 import React,{useState,useImperativeHandle} from 'react'
 import { Form } from 'antd';
-import {InputItem,SelectItem,DateItem,RadioItem} from './Components'
-import {selectOfFormData,inputOfFormData,dateOfFormdata} from '@/components/type.d'
+import {InputItem,SelectItem,DateItem,RadioItem,EnclosureItem} from './Components'
+import {selectOfFormData,inputOfFormData,dateOfFormdata,enclosureData} from '@/components/type.d'
 
 
 const layout = {
@@ -10,7 +10,7 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
-type mainDataItem =  selectOfFormData | inputOfFormData | dateOfFormdata
+type mainDataItem =  selectOfFormData | inputOfFormData | dateOfFormdata | enclosureData
 
 export type  FormDaraState = {
   mainData:  Array<mainDataItem>
@@ -28,11 +28,12 @@ export type  FormDataProps  = {
 
 const Formdata:React.FC<FormDataProps> = (props) => {
   const {configData,optionObj,clearItemArr,formDataType} = props
-  const [mainDataArr] = useState(configData.mainData)
+  const [mainDataArr,setMainDataArr] = useState(configData.mainData)
   const [mainRules] = useState(configData.rule)
   
   //* 初始化 整合 formdata 数据🐥
   const initFormDataModel = () => {
+    console.log('mainDataArr=>',mainDataArr)
     const data = mainDataArr.reduce((acc,cur:mainDataItem) => {
       acc[cur.name] = cur.value
       return acc
@@ -62,7 +63,23 @@ const Formdata:React.FC<FormDataProps> = (props) => {
       }, 0);
     }
   }));
-  // formDataType
+
+  const setEnclosureItemOperation = (item:enclosureData,data:any) => {
+    console.log('formdata-en->parent-oper=>',item,data)
+    const {name} = item
+
+    const newMainData = mainDataArr.map((item:any) => {
+      if (item.name === name) {
+        item.value.push(data);  
+        item.fileNumber = item.value.length;
+        form.setFieldsValue({ [name]: data  }); 
+      }
+      return item
+    })
+    setMainDataArr(newMainData)
+  }
+
+
   return (
     <Form {...layout} name="nest-messages" 
       initialValues={formModel}
@@ -83,6 +100,9 @@ const Formdata:React.FC<FormDataProps> = (props) => {
           }
           else if (item.type === 'radio') {
             return <RadioItem  key={key} radioInfo={item} radioRule={mainRules[item.name] ?mainRules[item.name] : null }/>
+          }
+          else if (item.type === 'enclosure') {
+            return <EnclosureItem key={key} setEnclosureItemOperation={setEnclosureItemOperation} enclosureInfo={item} enclosureRule={mainRules[item.name] ?mainRules[item.name] : null }/>
           }
           else {
             return 
