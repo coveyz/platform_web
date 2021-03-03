@@ -7,7 +7,7 @@ import {selectOfFormData,inputOfFormData,dateOfFormdata,enclosureData,enclosureO
 
 const layout = {
   labelCol: { span: 5 },
-  wrapperCol: { span: 16 },
+  wrapperCol: { span: 19 },
 };
 
 type mainDataItem =  selectOfFormData | inputOfFormData | dateOfFormdata | enclosureData | enclosureOfImagesData
@@ -72,7 +72,6 @@ const Formdata:React.FC<FormDataProps> = (props) => {
         operationType === 'delete' ? item.value = data : item.value.push(data)
         item.fileNumber = item.value.length;
         form.setFieldsValue({ [name]: item.value  }); 
-        // console.log('item=>',item)
       }
       return item
     })

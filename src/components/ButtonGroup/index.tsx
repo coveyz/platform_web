@@ -10,9 +10,12 @@ export type ButtonGroupState = {
   operationGroup:buttonState[]
 }
 
+
+
 export type ButtonGroupProps = {
   configData: ButtonGroupState
   handleButtonOptions: (buttonInfo: buttonState) => void
+  children?:any
 }
 
 const ButtonGroup:React.FC<ButtonGroupProps> = (props) => {
@@ -58,7 +61,6 @@ const ButtonGroup:React.FC<ButtonGroupProps> = (props) => {
             return (
                 <Dropdown className='button-item' overlay={() => menu(button)} key={key} disabled={!button.special}>
                   <Button type={button.type} icon={button.icon ? <SvgIcons iconClass={button.icon}/> : null}>
-                    {button.title} 
                     <DownOutlined />
                   </Button>
                 </Dropdown>
@@ -68,6 +70,9 @@ const ButtonGroup:React.FC<ButtonGroupProps> = (props) => {
             return 
           }
         })
+      }
+      {
+        props.children && props.children.additional  ? props.children.additional : null
       }
     </div>
   )

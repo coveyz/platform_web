@@ -3,7 +3,6 @@ import './platform.scss'
 import { Spin,Empty } from 'antd';
 import {buttonState,dropdownButtonState,operationGroupDialogState} from '@/components/type.d'
 import {getPlatformList} from '@/api/platform'
-import {integrationData} from '@/utils/tools'
 import config from '@/pages/platform/config/platform'
 import {ButtonGroup} from '@/components'
 import PlatformItem from './components/Item'
@@ -45,7 +44,7 @@ const Platform:React.FC<PlatformProps> = (props) => {
   }
 
   //* ButtonGroup 事件 🐹
-  const handleButtonOptions = (buttonInfo:buttonState | dropdownButtonState) => {
+  const handleButtonOptions = (buttonInfo:buttonState) => {
     const {name} = buttonInfo
     switch (name) {
       case 'Add':

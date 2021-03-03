@@ -4,9 +4,25 @@
 		padding: 0px;
 		margin-bottom: 10px;
 	}
+
+	.ant-page-header-heading-left {
+		margin: 0px;
+	}
+
 	.ant-page-header-heading-title {
 		border-left: 4px solid #0079fe;
 		padding-left: 10px;
 		font-size: 18px;
 	}
+	.platform-operation {
+		margin-bottom: 20px;
+		width: 60%;
+	}
+}
+
+.buttonGroupAdditional {
+	float: right;
+  .button-item {
+    margin-right: 0;
+  }
 }

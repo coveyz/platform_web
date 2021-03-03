@@ -1,8 +1,9 @@
 import React,{useEffect,useState} from 'react'
 import './Detail.scss'
-import { PageHeader } from 'antd';
+import { PageHeader,Button } from 'antd';
 import configData from '@/pages/platform/config/platformDetail'
-import {Formdata} from '@/components'
+import {Formdata,ButtonGroup} from '@/components'
+import {buttonState,dropdownButtonState} from '@/components/type.d'
 
 type DetailProps = {
   isEdit: boolean
@@ -25,6 +26,17 @@ const Detail:React.FC<DetailProps> = (props) => {
       setOptionsObj(operation)
     })
   }
+
+  const additionalOperation  = {
+      operationGroup: [ {
+        type: 'danger', // 类型 样式
+        buttonType: 'button', // 类型
+        title: '删除', // 文字
+        name: 'Delete', // 键 //区别操作
+        icon: 'delete', // 图标
+        special: true, // 特殊类型 // true 不进行 选中个数的判断
+      }]
+    }
 
 
     //* 假 formdata 下拉数据等
@@ -49,11 +61,28 @@ const Detail:React.FC<DetailProps> = (props) => {
         }, 1000);
       })
     }
+
+  const handleButtonOptions = (buttonInfo:buttonState) => {
+    console.log(buttonInfo)
+  }
   
 
   return (
     <div className="platform-frame">
       <PageHeader className="site-page-header" title={`${isEdit ? '编辑' : '新增'}平台`} />
+      <div className="platform-operation">
+        <ButtonGroup  configData={configData} handleButtonOptions={handleButtonOptions}>
+          {
+            {
+                additional:  (
+                <div className='buttonGroupAdditional'>
+                  <ButtonGroup  configData={additionalOperation} handleButtonOptions={handleButtonOptions}></ButtonGroup>
+                </div>
+              )
+          }
+        }
+        </ButtonGroup>
+      </div>
       <Formdata formDataType="dataformList" configData={configData} optionObj={optionObj}/>
     </div>
   )

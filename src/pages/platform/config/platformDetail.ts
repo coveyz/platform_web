@@ -1,4 +1,22 @@
 const data = {
+  operationGroup: [
+    {
+      type: 'primry', // 类型 样式
+      buttonType: 'linearButton', // 类型
+      title: '保存', // 文字
+      name: 'Add', // 键 //区别操作
+      icon: 'add', // 图标
+      special: true, // 特殊类型 // true 不进行 选中个数的判断
+    },
+    {
+      type: 'primry', // 类型 样式
+      buttonType: 'linearButton', // 类型
+      title: '返回', // 文字
+      name: 'Back', // 键 //区别操作
+      icon: 'back', // 图标
+      special: true, // 特殊类型 // true 不进行 选中个数的判断
+    },
+  ],
   mainData: [
     {
       type: 'input', // 类型
