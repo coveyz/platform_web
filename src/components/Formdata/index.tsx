@@ -1,8 +1,8 @@
 import './Formdata.scss'
 import React,{useState,useImperativeHandle} from 'react'
 import { Form } from 'antd';
-import {InputItem,SelectItem,DateItem,RadioItem,EnclosureItem} from './Components'
-import {selectOfFormData,inputOfFormData,dateOfFormdata,enclosureData} from '@/components/type.d'
+import {InputItem,SelectItem,DateItem,RadioItem,EnclosureItem,EnclosureOfImages} from './Components'
+import {selectOfFormData,inputOfFormData,dateOfFormdata,enclosureData,enclosureOfImagesData} from '@/components/type.d'
 
 
 const layout = {
@@ -10,7 +10,7 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
-type mainDataItem =  selectOfFormData | inputOfFormData | dateOfFormdata | enclosureData
+type mainDataItem =  selectOfFormData | inputOfFormData | dateOfFormdata | enclosureData | enclosureOfImagesData
 
 export type  FormDaraState = {
   mainData:  Array<mainDataItem>
@@ -33,7 +33,6 @@ const Formdata:React.FC<FormDataProps> = (props) => {
   
   //* 初始化 整合 formdata 数据🐥
   const initFormDataModel = () => {
-    console.log('mainDataArr=>',mainDataArr)
     const data = mainDataArr.reduce((acc,cur:mainDataItem) => {
       acc[cur.name] = cur.value
       return acc
@@ -64,15 +63,16 @@ const Formdata:React.FC<FormDataProps> = (props) => {
     }
   }));
 
-  const setEnclosureItemOperation = (item:enclosureData,data:any) => {
-    console.log('formdata-en->parent-oper=>',item,data)
+  /** 附件上传操作 */
+  const setEnclosureItemOperation = (item:enclosureData | enclosureOfImagesData,data:any,operationType?: string) => {
     const {name} = item
 
     const newMainData = mainDataArr.map((item:any) => {
       if (item.name === name) {
-        item.value.push(data);  
+        operationType === 'delete' ? item.value = data : item.value.push(data)
         item.fileNumber = item.value.length;
-        form.setFieldsValue({ [name]: data  }); 
+        form.setFieldsValue({ [name]: item.value  }); 
+        // console.log('item=>',item)
       }
       return item
     })
@@ -105,7 +105,7 @@ const Formdata:React.FC<FormDataProps> = (props) => {
             return <EnclosureItem key={key} setEnclosureItemOperation={setEnclosureItemOperation} enclosureInfo={item} enclosureRule={mainRules[item.name] ?mainRules[item.name] : null }/>
           }
           else {
-            return 
+            return <EnclosureOfImages key={key} setEnclosureItemOperation={setEnclosureItemOperation} enclosureOfImagesInfo={item} enclosureOfImagesRule={mainRules[item.name] ?mainRules[item.name] : null }/>
           }
         })
       }

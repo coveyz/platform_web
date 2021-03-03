@@ -65,3 +65,9 @@ export interface enclosureData extends FormDataState {
   fileNumber?: number
   fileList?: any[]
 }
+export interface enclosureOfImagesData extends FormDataState {
+  value: any
+  fileNumber?: number
+  fileList?: any[]
+  limit?: number
+}
