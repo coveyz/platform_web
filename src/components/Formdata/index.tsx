@@ -71,13 +71,17 @@ const Formdata:React.FC<FormDataProps> = (props) => {
       if (item.name === name) {
         operationType === 'delete' ? item.value = data : item.value.push(data)
         item.fileNumber = item.value.length;
-        form.setFieldsValue({ [name]: item.value  }); 
+        //* 如果不加这一步 文件上传change 可能会触发一次 导致value 变成了 antd 给的file
+        setTimeout(() => {
+          form.setFieldsValue({ [name]: item.value  }); 
+        }, 0);
       }
       return item
     })
     setMainDataArr(newMainData)
   }
 
+  console.log('formModel=>',formModel)
 
   return (
     <Form {...layout} name="nest-messages" 

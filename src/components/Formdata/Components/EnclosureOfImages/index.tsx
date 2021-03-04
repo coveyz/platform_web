@@ -15,6 +15,7 @@ const EnclosureOfImages:React.FC<EnclosureOfImagesProps> = (props) => {
   const [previewVisible,setPreviewVisible] = useState(false)
   const [previewImage,setPreviewImage] = useState('')
   const [imgList,setImgList] = useState([])
+  const [imgValArr,setImgValArr] = useState([])
 
   const uploadButton = (
     <div>
@@ -35,7 +36,9 @@ const EnclosureOfImages:React.FC<EnclosureOfImagesProps> = (props) => {
   /** change 操作 UI */
   const handleChange = (info:any) => {
     const {fileList} = info
+    //console.log('handleChange',fileList)
     setImgList(fileList)
+    console.log('change')
   };
 
   /** 点击预览 */
@@ -57,7 +60,7 @@ const EnclosureOfImages:React.FC<EnclosureOfImagesProps> = (props) => {
   const upload = (uploadInfo:any) => {
     const {file,name} = uploadInfo
 
-    console.log('uploadInfo=>',file)
+    //console.log('uploadInfo=>',file)
     const data = {
       files: file
     };
@@ -71,30 +74,33 @@ const EnclosureOfImages:React.FC<EnclosureOfImagesProps> = (props) => {
       const { data } = res.data;
       const fileData = Object.assign({},{...data,fileName: data['fileNameList'] && data['fileNameList'].length === 1 ? data['fileNameList'][0] : name})
       setEnclosureItemOperation(enclosureOfImagesInfo,fileData)
+      setImgValArr(fileData)
       uploadInfo.onSuccess()
     })
   }
 
   const handleRemove = (info:any) => {
-    // console.log('info=->',info)
+    // //console.log('info=->',info)
     const {name} = info
     const {value} = enclosureOfImagesInfo
     const newImgaeArr = value.filter((img:any) => img.fileName!==name)
+    setImgValArr(newImgaeArr)
     setEnclosureItemOperation(enclosureOfImagesInfo,newImgaeArr,'delete')
+    console.log('remove',newImgaeArr)
   }
 
   return (
     <>
       <Form.Item  
-        label={enclosureOfImagesInfo.title} 
-        name={enclosureOfImagesInfo.name}  
-        className= {[
-          `new-${enclosureOfImagesInfo.type}-item`,
-          enclosureOfImagesInfo.tips ? 'tipsStyle' : '', 
-          enclosureOfImagesInfo.level === 'special' ? `new-${enclosureOfImagesInfo.name}-item` : '',
-          enclosureOfImagesInfo.title.length > 6 ? 'textSoLong' : ''
-        ].join(' ')}
-        rules={enclosureOfImagesRule}
+          label={enclosureOfImagesInfo.title} 
+          name={enclosureOfImagesInfo.name}  
+          className= {[
+            `new-${enclosureOfImagesInfo.type}-item`,
+            enclosureOfImagesInfo.tips ? 'tipsStyle' : '', 
+            enclosureOfImagesInfo.level === 'special' ? `new-${enclosureOfImagesInfo.name}-item` : '',
+            enclosureOfImagesInfo.title.length > 6 ? 'textSoLong' : ''
+          ].join(' ')}
+          rules={enclosureOfImagesRule}
         >
           <Upload
             action="123"

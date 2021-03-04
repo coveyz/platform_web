@@ -22,7 +22,7 @@ const data = {
       type: 'input', // 类型
       title: '名称', // 文字
       name: 'name', // 键
-      value: '555', // 值
+      value: '', // 值
       level: 'special', // 是否有特殊处理 样式单独处理
       tips: false, // true: label 会标红
       readonly: false, // 是否 只读
@@ -90,7 +90,7 @@ const data = {
       type: 'input', // 类型
       title: '回调URL(单点登录)', // 文字
       name: 'hdurl', // 键
-      value: '555', // 值
+      value: '', // 值
       level: 'special', // 是否有特殊处理 样式单独处理
       tips: false, // true: label 会标红
       readonly: false, // 是否 只读
@@ -99,7 +99,7 @@ const data = {
       type: 'input', // 类型
       title: '安全码', // 文字
       name: 'aqm', // 键
-      value: '555', // 值
+      value: '', // 值
       level: 'special', // 是否有特殊处理 样式单独处理
       tips: false, // true: label 会标红
       readonly: false, // 是否 只读
@@ -109,7 +109,7 @@ const data = {
       type: 'input', // 类型
       title: '平台首页URL', // 文字
       name: 'ptsyurl', // 键
-      value: '555', // 值
+      value: '', // 值
       level: 'special', // 是否有特殊处理 样式单独处理
       tips: false, // true: label 会标红
       readonly: false, // 是否 只读
@@ -118,7 +118,7 @@ const data = {
       type: 'input', // 类型
       title: 'Client ID', // 文字
       name: 'id', // 键
-      value: '555', // 值
+      value: '', // 值
       level: 'special', // 是否有特殊处理 样式单独处理
       tips: false, // true: label 会标红
       readonly: false, // 是否 只读

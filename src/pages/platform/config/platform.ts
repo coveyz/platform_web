@@ -58,7 +58,7 @@ const data = {
       type: 'input', // 类型
       title: '单位或地址', // 文字
       name: 'dwhdz', // 键
-      value: '555', // 值
+      value: '', // 值
       level: 'special', // 是否有特殊处理 样式单独处理
       tips: false, // true: label 会标红
       readonly: false, // 是否 只读

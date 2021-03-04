@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useRef} from 'react'
 import './Detail.scss'
 import { PageHeader,Button } from 'antd';
 import configData from '@/pages/platform/config/platformDetail'
@@ -12,6 +12,7 @@ type DetailProps = {
 const Detail:React.FC<DetailProps> = (props) => {
   const {isEdit} = props
   const [optionObj,setOptionsObj] = useState({})
+  const childRef = useRef<any>(null)
 
 
   useEffect(() => {
@@ -63,7 +64,23 @@ const Detail:React.FC<DetailProps> = (props) => {
     }
 
   const handleButtonOptions = (buttonInfo:buttonState) => {
-    console.log(buttonInfo)
+    // console.log(buttonInfo)
+    const {name} = buttonInfo
+    switch (name) {
+      case 'Add':
+        addPlatformOperation()    
+        break;
+      default:
+        break;
+    }
+  }
+
+  /** 新增平台 */
+  const addPlatformOperation = () => {
+    console.log('add')
+    childRef['current']['verification']().then((res:any) => {
+      console.log('formdata-success',res)
+    })
   }
   
 
@@ -83,7 +100,7 @@ const Detail:React.FC<DetailProps> = (props) => {
         }
         </ButtonGroup>
       </div>
-      <Formdata formDataType="dataformList" configData={configData} optionObj={optionObj}/>
+      <Formdata cRef={childRef} formDataType="dataformList" configData={configData} optionObj={optionObj}/>
     </div>
   )
 }

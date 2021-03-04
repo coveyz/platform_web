@@ -41,17 +41,17 @@
 	}
 	.new-enclosureOfImages-item {
 		.ant-form-item-label {
-			height: auto;
+			height: 104px;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 		}
-    .ant-upload.ant-upload-select-picture-card {
-      width: 100%;
-      margin: 0;
-    }
-    .ant-upload-list-picture-card-container {
-      margin: 0;
-    }
+		.ant-upload.ant-upload-select-picture-card {
+			width: 100%;
+			margin: 0;
+		}
+		.ant-upload-list-picture-card-container {
+			margin: 0;
+		}
 	}
 }
