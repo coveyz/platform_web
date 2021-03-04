@@ -1,9 +1,9 @@
 import React from 'react'
 import Detail from './components/Detail'
 
-const edit = () => {
+const edit = (props:any) => {
   return (
-    <Detail isEdit={true}/>
+    <Detail isEdit={true} {...props}/>
   )
 }
 

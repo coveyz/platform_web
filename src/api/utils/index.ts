@@ -8,3 +8,11 @@ export const uploadFile = (requestData: FormData) => {
     url: '/api/upload/batch'
   })
 }
+
+export const listDict = (requestData: string[]) => {
+  return http({
+    method: 'POST',
+    data: requestData,
+    url: `/api/dict/listDictArray`
+  })
+}

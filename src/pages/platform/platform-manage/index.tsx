@@ -1,7 +1,7 @@
 import React,{useEffect,useState,useRef} from 'react'
 import './platform.scss'
 import { Spin,Empty } from 'antd';
-import {buttonState,dropdownButtonState,operationGroupDialogState} from '@/components/type.d'
+import {buttonState} from '@/components/type.d'
 import {getPlatformList} from '@/api/platform'
 import config from '@/pages/platform/config/platform'
 import {ButtonGroup} from '@/components'
@@ -61,7 +61,7 @@ const Platform:React.FC<PlatformProps> = (props) => {
   }
   //* 新增操作
   const addOptions = () => {
-    console.log('新增')
+    console.log('新增',props)
     // {pathname:`/demo/${this.state.id}/${this.state.name}`}
     props.history.push('/platform/create')
     // setDialogInfo({...dialogInfo,visible: true, title: '新增平台',type: 'add'})
@@ -85,16 +85,7 @@ const Platform:React.FC<PlatformProps> = (props) => {
 
   }
 
-  // const clearItemArr = () => {
-  //   configData['mainData'] = configData['mainData'].map((item:any) => {
-  //     item.value = Array.isArray(item.value) ? [] : ''
-  //     return item
-  //   })
-  //   setConfigData(configData)
-  // }
-
   const childRef = useRef<any>(null)
-
           
   return (
     <div className='platformManage-frame'>

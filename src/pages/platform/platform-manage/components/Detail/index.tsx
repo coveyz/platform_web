@@ -1,12 +1,16 @@
 import React,{useEffect,useState,useRef} from 'react'
 import './Detail.scss'
-import { PageHeader,Button } from 'antd';
+import { PageHeader } from 'antd';
 import configData from '@/pages/platform/config/platformDetail'
 import {Formdata,ButtonGroup} from '@/components'
-import {buttonState,dropdownButtonState} from '@/components/type.d'
+import {buttonState} from '@/components/type.d'
+import {listDict} from '@/api/utils'
+import {handlePlatformOperation} from '@/api/platform'
+import {successMessage} from '@/utils/tools'
 
 type DetailProps = {
   isEdit: boolean
+  history?: any
 }
 
 const Detail:React.FC<DetailProps> = (props) => {
@@ -14,20 +18,11 @@ const Detail:React.FC<DetailProps> = (props) => {
   const [optionObj,setOptionsObj] = useState({})
   const childRef = useRef<any>(null)
 
-
   useEffect(() => {
     getInit()
     return () => {}
   }, [])
-
-  const getInit = () => {
-    getDataFromFakeInterfaceOfFormData().then((res) => {
-      console.log(res)
-      const {operation} = res as {[name:string]: [] | string | {} }
-      setOptionsObj(operation)
-    })
-  }
-
+  
   const additionalOperation  = {
       operationGroup: [ {
         type: 'danger', // 类型 样式
@@ -37,34 +32,29 @@ const Detail:React.FC<DetailProps> = (props) => {
         icon: 'delete', // 图标
         special: true, // 特殊类型 // true 不进行 选中个数的判断
       }]
-    }
+  }
+
+  /** 初始化操作 */
+  const getInit = () => {
+    getDictData().then((res:any) => {
+      setOptionsObj(res) 
+    })
+  }
 
 
-    //* 假 formdata 下拉数据等
-    const getDataFromFakeInterfaceOfFormData = () => {
+  /** 获取 -> 字典操作 */
+  const getDictData = () => {
       return new Promise(resolve => {
-        setTimeout(() => {
-          const data = [
-            {
-              value: 'male',
-              text: 'male'
-            },
-            {
-              value: 'female',
-              text: 'female'
-            },
-            {
-              value: 'other',
-              text: 'other'
-            }
-          ]
-          resolve({operation: {xfxs:data}})
-        }, 1000);
+        const requestData = ['clientType']
+        listDict(requestData).then(res => {
+          const {data} = res.data
+          resolve(data)
+        })
       })
     }
-
+  
+  /** button事件 */
   const handleButtonOptions = (buttonInfo:buttonState) => {
-    // console.log(buttonInfo)
     const {name} = buttonInfo
     switch (name) {
       case 'Add':
@@ -80,9 +70,20 @@ const Detail:React.FC<DetailProps> = (props) => {
     console.log('add')
     childRef['current']['verification']().then((res:any) => {
       console.log('formdata-success',res)
+      const resquestData = {}
+
+      Object.assign(resquestData,{...res,logoUrl: res['logoUrl'][0]['filePath']})
+
+      platformOperation(resquestData)
     })
   }
-  
+
+  const platformOperation = (requestData:any) => {
+    handlePlatformOperation(requestData).then(res => {
+      successMessage('新建平台成功')
+      props.history.push('/platform/index')
+    })
+  }
 
   return (
     <div className="platform-frame">

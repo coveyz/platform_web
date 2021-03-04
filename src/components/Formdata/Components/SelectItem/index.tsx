@@ -17,7 +17,7 @@ function onGenderChange(value:any) {
 
 const SelectItem:React.FC<SelectItemProps> = (props) => {
   const {selectInfo,optionObj,selectRule} = props
-
+  console.log('selectInfo=>',selectInfo,optionObj)
   return (
     <Form.Item name={selectInfo.name} label={selectInfo.title} 
     rules={selectRule}
