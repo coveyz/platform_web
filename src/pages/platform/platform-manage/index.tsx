@@ -56,36 +56,25 @@ const Platform:React.FC<PlatformProps> = (props) => {
   }
   //* 平台项 编辑/设置 操作
   const platformItemOptions = (item: any,type: string) => {
-    // console.log('item=>',item,'type=>',type)
-    // setDialogInfo({...dialogInfo,visible: true, title: type === 'setting'? '请选择用户': '修改平台',type: type})
+    const {id} = item
+    switch (type) {
+      case 'edit':
+        editOptions(id)
+        break;
+      default:
+        break;
+    }
   }
   //* 新增操作
   const addOptions = () => {
-    console.log('新增',props)
-    // {pathname:`/demo/${this.state.id}/${this.state.name}`}
     props.history.push('/platform/create')
-    // setDialogInfo({...dialogInfo,visible: true, title: '新增平台',type: 'add'})
   }
 
-  const deleteOption = () => {
-    // setDialogInfo({...dialogInfo,visible: false})
+  //* 编辑操作
+  const editOptions = (id:string) => {
+    props.history.push(`/platform/edit/${id}`)
   }
 
-  const cancelOption = () => {
-    childRef['current']['reset']()
-    // setDialogInfo({...dialogInfo,visible: false})
-  }
-
-  //* 确定操作
-  const confirmOption = () => {
-    childRef['current']['verification']().then((res:any) => {
-      console.log('confirmOption-callback',res)
-      // setDialogInfo({...dialogInfo,visible: false})
-    })
-
-  }
-
-  const childRef = useRef<any>(null)
           
   return (
     <div className='platformManage-frame'>

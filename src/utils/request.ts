@@ -22,7 +22,7 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   (response) => {
-    console.log('http-interceptors-resopnse=>', response)
+    // console.log('http-interceptors-resopnse=>', response)
     return response
   },
   (error) => {

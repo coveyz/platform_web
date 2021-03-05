@@ -1,5 +1,5 @@
 import http from '@/utils/request'
-import { platformListState } from './type.d'
+import { platformListState, platformoperationState, platformDetailState } from './type.d'
 
 export const getPlatformList = (requestData: platformListState) => {
   return http({
@@ -9,10 +9,18 @@ export const getPlatformList = (requestData: platformListState) => {
   })
 }
 
-export const handlePlatformOperation = (requestData: any) => {
+export const handlePlatformOperation = (requestData: platformoperationState) => {
   return http({
     method: 'POST',
     data: requestData,
     url: `/api/platformManagement/saveOrUpdatePM`
+  })
+}
+
+export const getPlatformDetail = (requestData: platformDetailState) => {
+  return http({
+    method: 'POST',
+    data: requestData,
+    url: `/api/platformManagement/getPMById`
   })
 }

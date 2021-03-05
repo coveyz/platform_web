@@ -14,8 +14,7 @@ const EnclosureOfImages:React.FC<EnclosureOfImagesProps> = (props) => {
 
   const [previewVisible,setPreviewVisible] = useState(false)
   const [previewImage,setPreviewImage] = useState('')
-  const [imgList,setImgList] = useState([])
-  const [imgValArr,setImgValArr] = useState([])
+  const [imgList,setImgList] = useState(enclosureOfImagesInfo.fileList)
 
   const uploadButton = (
     <div>
@@ -34,11 +33,17 @@ const EnclosureOfImages:React.FC<EnclosureOfImagesProps> = (props) => {
   }
 
   /** change 操作 UI */
-  const handleChange = (info:any) => {
-    const {fileList} = info
-    //console.log('handleChange',fileList)
-    setImgList(fileList)
-    console.log('change')
+  const handleChange = () => {
+    let imgList
+    if (Array.isArray(enclosureOfImagesInfo.value)) {
+      imgList = enclosureOfImagesInfo.value.reduce((acc:any,cur:any) => {
+        acc.push({url: cur.filePath})
+        return acc
+      },[])
+    } else {
+      imgList = [{url: enclosureOfImagesInfo.value}]
+    }
+    setImgList(imgList)
   };
 
   /** 点击预览 */
@@ -60,7 +65,6 @@ const EnclosureOfImages:React.FC<EnclosureOfImagesProps> = (props) => {
   const upload = (uploadInfo:any) => {
     const {file,name} = uploadInfo
 
-    //console.log('uploadInfo=>',file)
     const data = {
       files: file
     };
@@ -70,23 +74,26 @@ const EnclosureOfImages:React.FC<EnclosureOfImagesProps> = (props) => {
       fd.append(key,data[key])
     })
     
+    /**
+     * 需要重新写  
+     * 需要判断 当前value 字符串还是数组
+     */
     uploadFile(fd).then(res => {
       const { data } = res.data;
-      const fileData = Object.assign({},{...data,fileName: data['fileNameList'] && data['fileNameList'].length === 1 ? data['fileNameList'][0] : name})
+      const fileData = Object.assign({},{...data,url: data['filePath'],fileName: data['fileNameList'] && data['fileNameList'].length === 1 ? data['fileNameList'][0] : name})
+      console.log('upload-callback=>',fileData);
       setEnclosureItemOperation(enclosureOfImagesInfo,fileData)
-      setImgValArr(fileData)
       uploadInfo.onSuccess()
     })
   }
 
   const handleRemove = (info:any) => {
-    // //console.log('info=->',info)
-    const {name} = info
-    const {value} = enclosureOfImagesInfo
-    const newImgaeArr = value.filter((img:any) => img.fileName!==name)
-    setImgValArr(newImgaeArr)
-    setEnclosureItemOperation(enclosureOfImagesInfo,newImgaeArr,'delete')
-    console.log('remove',newImgaeArr)
+    console.log('info',info)
+    const {url} = info
+    const {fileList} = enclosureOfImagesInfo
+    const newFileData = (fileList as any[]).filter((file:any) => file.url !== url)
+
+    setEnclosureItemOperation(enclosureOfImagesInfo,newFileData,'delete')
   }
 
   return (
@@ -105,7 +112,7 @@ const EnclosureOfImages:React.FC<EnclosureOfImagesProps> = (props) => {
           <Upload
             action="123"
             listType="picture-card"
-            fileList={imgList}
+            fileList={enclosureOfImagesInfo.fileList}
             onPreview={handlePreview}
             onChange={handleChange}
             customRequest={upload}

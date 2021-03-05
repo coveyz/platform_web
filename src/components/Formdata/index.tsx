@@ -59,7 +59,13 @@ const Formdata:React.FC<FormDataProps> = (props) => {
       setFormModel(initFormDataModel())
       setTimeout(() => {
         form.resetFields()
+        console.log(mainDataArr)
       }, 0);
+    },
+    backFill: () => {
+      mainDataArr.forEach(item => {
+        form.setFieldsValue({ [item.name]: item.value  }); 
+      })
     }
   }));
 
@@ -69,25 +75,24 @@ const Formdata:React.FC<FormDataProps> = (props) => {
 
     const newMainData = mainDataArr.map((item:any) => {
       if (item.name === name) {
-        operationType === 'delete' ? item.value = data : item.value.push(data)
-        item.fileNumber = item.value.length;
-        //* 如果不加这一步 文件上传change 可能会触发一次 导致value 变成了 antd 给的file
+        operationType === 'delete' ? item.fileList = data : item.fileList.push(data)
+        item.fileNumber = item.fileList && item.fileList.length > 0 ? item.fileList.length : 1
+        item.value = data.filePath ? data.filePath : ''
         setTimeout(() => {
+          //* 如果不加这一步 文件上传change 可能会触发一次 导致value 变成了 antd 给的file
           form.setFieldsValue({ [name]: item.value  }); 
         }, 0);
       }
       return item
     })
     setMainDataArr(newMainData)
+    console.log('formModel=>',formModel)
   }
-
-  console.log('formModel=>',formModel)
 
   return (
     <Form {...layout} name="nest-messages" 
       initialValues={formModel}
       form={form}
-      // className='formdata-frame'
       className={['formdata-fram',formDataType ? formDataType : ''].join(' ')}
     >
       {

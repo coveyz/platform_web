@@ -31,7 +31,7 @@ const data = {
       type: 'enclosureOfImages', // 类型
       title: '图标', // 文字
       name: 'logoUrl', // 键
-      value: [], // 值
+      value: '', // 值
       fileNumber: 0, // 文件名
       limit: 1,
       fileList: [], // 文件列表
