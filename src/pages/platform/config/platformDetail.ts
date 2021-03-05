@@ -17,6 +17,18 @@ const data = {
       special: true, // 特殊类型 // true 不进行 选中个数的判断
     },
   ],
+  operationGroupOfDialog: [
+    {
+      title: '取消',
+      name: 'cancel',
+      type: '',
+    },
+    {
+      title: '确定',
+      name: 'confirm',
+      type: 'primary',
+    },
+  ],
   mainData: [
     {
       type: 'input', // 类型

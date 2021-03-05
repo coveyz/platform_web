@@ -1,26 +1,21 @@
-import React,{useState} from 'react'
-import { Modal, Button } from 'antd';
+import React from 'react'
+import { Modal } from 'antd';
 import {DialogState} from '@/components/type.d'
+
+type DialogChildState = {
+  operationGroup?: JSX.Element[]
+  content?:any
+}
 
 type DialogProps = {
   dialogInfo: DialogState
+  children: DialogChildState
 }
 
 const Dialog:React.FC<DialogProps> = (props) => {
-
-  const [initOperationGroup] = useState([
-    <Button key="back" >
-       Return
-     </Button>,
-     <Button key="submit" type="primary">
-       Submit
-     </Button>
-  ])
-
   const {dialogInfo} = props
   const {visible} = dialogInfo
 
- const {operationGroup,content} = props.children as {operationGroup?: Element[],content?: any}
 
   return (
     <div>
@@ -29,13 +24,13 @@ const Dialog:React.FC<DialogProps> = (props) => {
           closable={false}
           title={ dialogInfo.title? dialogInfo.title : 'title'}
           footer={
-
-            dialogInfo.isOption ? operationGroup && operationGroup.length ? operationGroup : initOperationGroup
+            dialogInfo.isOption ? props.children && props.children.operationGroup && props.children.operationGroup.length ? props.children.operationGroup : [null]
                                 : [null]
           }
         >
           {
-            dialogInfo.content ? dialogInfo.content : content
+            dialogInfo.content ? dialogInfo.content 
+                               : props.children && props.children.content
           }
         </Modal>
     </div>

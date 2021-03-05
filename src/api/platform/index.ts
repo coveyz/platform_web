@@ -1,5 +1,5 @@
 import http from '@/utils/request'
-import { platformListState, platformoperationState, platformDetailState } from './type.d'
+import { platformListState, platformoperationState, platformDetailState, deletePlatformState } from './type.d'
 
 export const getPlatformList = (requestData: platformListState) => {
   return http({
@@ -22,5 +22,14 @@ export const getPlatformDetail = (requestData: platformDetailState) => {
     method: 'POST',
     data: requestData,
     url: `/api/platformManagement/getPMById`
+  })
+}
+
+/** 可以删除多个 */
+export const deletePlatform = (requestData: deletePlatformState) => {
+  return http({
+    method: 'POST',
+    data: requestData,
+    url: `/api/platformManagement/batchDeleteByIds`
   })
 }

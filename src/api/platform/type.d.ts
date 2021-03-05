@@ -19,3 +19,9 @@ export type platformoperationState = {
 export type platformDetailState = {
   id: string
 }
+
+
+
+export type deletePlatformState = {
+  ids: string[]
+}
