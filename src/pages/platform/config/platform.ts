@@ -1,4 +1,5 @@
 const data = {
+  searchbar: [],
   operationGroup: [
     // {
     // 	type: 'primary', // 类型 样式
@@ -38,20 +39,16 @@ const data = {
   ],
   operationGroupOfDialog: [
     {
-      title: '删除',
-      name: 'delete',
-      type: 'danger',
+      title: '保存',
+      name: 'confirm',
+      type: 'primary',
     },
     {
       title: '取消',
       name: 'cancel',
       type: '',
     },
-    {
-      title: '确定',
-      name: 'confirm',
-      type: 'primary',
-    },
+   
   ],
   mainData: [
     {
