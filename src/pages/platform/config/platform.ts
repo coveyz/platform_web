@@ -1,5 +1,24 @@
 const data = {
-  searchbar: [],
+  searchbar: [
+    {
+      type: 'select',
+      title: '角色',
+      name: 'role',
+      value: '',
+      show: true,
+      level: 'ordinary',
+      options: 'role'
+    },
+    {
+      type: 'select',
+      title: '角色组',
+      name: 'roleGroup',
+      value: '',
+      show: true,
+      level: 'ordinary',
+      options: 'roleGroup'
+    }
+  ],
   operationGroup: [
     // {
     // 	type: 'primary', // 类型 样式
@@ -48,7 +67,7 @@ const data = {
       name: 'cancel',
       type: '',
     },
-   
+
   ],
   mainData: [
     {
@@ -95,18 +114,18 @@ const data = {
         {
           // required: true,
           // message: `请输入单位地址`,
-          validator: (_:any, value:any) => {
+          validator: (_: any, value: any) => {
             return value ? Promise.resolve() : Promise.reject('Should accept agreement')
           }
         },
       ],
-      slrq:
-        [
-          {
-            required: true,
-            message: `请输入单位地址`
-          },
-        ],
+    slrq:
+      [
+        {
+          required: true,
+          message: `请输入单位地址`
+        },
+      ],
   },
 
   type: 'platform'

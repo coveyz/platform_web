@@ -27,6 +27,7 @@ const Dialog:React.FC<DialogProps> = (props) => {
             dialogInfo.isOption ? props.children && props.children.operationGroup && props.children.operationGroup.length ? props.children.operationGroup : [null]
                                 : [null]
           }
+          width={dialogInfo.width ? dialogInfo.width : 416}
         >
           {
             dialogInfo.content ? dialogInfo.content 

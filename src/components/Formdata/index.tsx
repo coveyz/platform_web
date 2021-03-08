@@ -86,7 +86,7 @@ const Formdata:React.FC<FormDataProps> = (props) => {
       return item
     })
     setMainDataArr(newMainData)
-    console.log('formModel=>',formModel)
+    // console.log('formModel=>',formModel)
   }
 
   return (

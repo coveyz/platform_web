@@ -71,3 +71,21 @@ export interface enclosureOfImagesData extends FormDataState {
   fileList?: any[]
   limit?: number
 }
+
+
+
+
+//* Searchbar typescript
+export interface SearchBarState {
+  type: string
+  title: string
+  name: string
+  show: boolean
+  level: string
+}
+
+export interface selectOfSearchBar extends SearchBarState {
+  value: string
+  options?: string | Array
+}
+

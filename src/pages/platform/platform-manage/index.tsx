@@ -21,6 +21,7 @@ const Platform:React.FC<PlatformProps> = (props) => {
   const [dialogState,setDialogState] = useState({
     visible: false,
     isOption: true,
+    width: '55%',
     title: '请选择用户',
     type: ''
   })
@@ -51,7 +52,10 @@ const Platform:React.FC<PlatformProps> = (props) => {
       }
       getRole(requestData).then(res => {
         const {data} = res.data
-        resolve({role: data})
+        const roleList = data.map((item:any) => {
+          return {...item,text: item.name,value: item.id}
+        })
+        resolve({role: roleList})
       })
     })
   }
@@ -63,7 +67,10 @@ const Platform:React.FC<PlatformProps> = (props) => {
       }
       getRoleGroup(requestData).then(res => {
         const {data} = res.data
-        resolve({roleGroup: data})
+        const roleGroupList = data.map((item:any) => {
+          return {...item,text: item.name,value: item.id}
+        })
+        resolve({roleGroup: roleGroupList})
       })
     })
   }
@@ -158,7 +165,7 @@ const Platform:React.FC<PlatformProps> = (props) => {
             ),
             content: (
               <>  
-                  <SearchBar />
+                  <SearchBar configData={configData} optionObj={optionObj}/>
                   4123213123
               </>
             )
