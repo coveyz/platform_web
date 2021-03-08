@@ -187,8 +187,6 @@ const Detail:React.FC<DetailProps> = (props) => {
     })
   }
 
-
-
   return (
     <div className="platform-frame">
       <PageHeader className="site-page-header" title={`${isEdit ? '编辑' : '新增'}平台`} />

@@ -25,3 +25,22 @@ export type platformDetailState = {
 export type deletePlatformState = {
   ids: string[]
 }
+
+export type roleOfSelectUserState = {
+  name: string
+}
+
+export type roleGroupOfSelectUserState = {
+  name: string
+}
+
+export type selectedUserState = {
+  pmId: string
+  personName: string
+}
+
+export type userToBeSelectedState = {
+  personName: string
+  groupId: string
+  deptId: string
+}

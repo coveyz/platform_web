@@ -1,11 +1,11 @@
 import React,{useEffect,useState,useRef} from 'react'
 import './platform.scss'
 import { Spin,Empty } from 'antd';
+import config from '@/pages/platform/config/platform'
+import PlatformItem from './components/Item'
+import {ButtonGroup} from '@/components'
 import {buttonState} from '@/components/type.d'
 import {getPlatformList} from '@/api/platform'
-import config from '@/pages/platform/config/platform'
-import {ButtonGroup} from '@/components'
-import PlatformItem from './components/Item'
 
 
 type PlatformProps = {
