@@ -3,7 +3,7 @@ import './platform.scss'
 import { Spin,Empty,Button } from 'antd';
 import config from '@/pages/platform/config/platform'
 import PlatformItem from './components/Item'
-import {ButtonGroup,Dialog,SearchBar} from '@/components'
+import {ButtonGroup,Dialog,SearchBar,Transfer} from '@/components'
 import {buttonState,operationGroupDialogState} from '@/components/type.d'
 import {getPlatformList,getRole,getRoleGroup,getDept} from '@/api/platform'
 import {integrationData} from '@/utils/tools'
@@ -139,12 +139,13 @@ const Platform:React.FC<PlatformProps> = (props) => {
   const handleDialogOperation = (item: operationGroupDialogState) => {
   }
 
+  /** searchbar 事件 */
   const searchbarOperation = (type:string,data: any) => {
     childRef['current']['verification']().then((res:any) => {
       console.log('res=>',res)
     })
   }
-          
+
   return (
     <div className='platformManage-frame'>
       <ButtonGroup configData={configData} handleButtonOptions={handleButtonOptions}/>
@@ -171,7 +172,12 @@ const Platform:React.FC<PlatformProps> = (props) => {
             ),
             content: (
               <>  
-                  <SearchBar searchbarOperation={searchbarOperation} cRef={childRef} configData={configData} optionObj={optionObj}/>
+                  <div className="selectUser-frame">
+                    <SearchBar searchbarOperation={searchbarOperation} cRef={childRef} configData={configData} optionObj={optionObj}/>
+                  </div>
+                  <div className="selectUser-frame">
+                    <Transfer />
+                  </div>
               </>
             )
           }
