@@ -17,6 +17,20 @@ const data = {
       show: true,
       level: 'ordinary',
       options: 'roleGroup'
+    },
+    {
+      type: "multipleSelectionTree", // 类型
+      title: "机构", // 文字
+      name: "lbs", // 请求的key
+      value: [], // 值
+      text: [],  // 选中的文字  // 针对 树类型结构  multipleSelectionTree
+      aggregate: [], // 选中的文字 和 值 都在这里  // 针对 树 multipleSelectionTree
+      options: "dep", // 选项 // 针对 树,select 等
+      show: true, // 是否显示隐藏 // 针对更多搜索
+      level: "special", // ordinary/special // 针对更多搜索
+      isMultiple:false,
+      children: 'nextDept',
+      label: 'name'
     }
   ],
   operationGroup: [

@@ -89,3 +89,12 @@ export interface selectOfSearchBar extends SearchBarState {
   options?: string | Array
 }
 
+export interface multipleSelectionTree extends SearchBarState {
+  value: any[] | string | any,
+  text?: any[]
+  aggregate?: any[]
+  options?: string
+  isMultiple?: boolean
+  children?: string
+  label?: string
+}

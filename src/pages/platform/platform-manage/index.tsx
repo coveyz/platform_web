@@ -14,6 +14,7 @@ type PlatformProps = {
 }
 
 const Platform:React.FC<PlatformProps> = (props) => {
+  const childRef = useRef<any>(null)
   const [configData,setConfigData] = useState(config)
   const [platformList,setplatformList] = useState([])
   const [loading,setloading] = useState(true) 
@@ -138,6 +139,11 @@ const Platform:React.FC<PlatformProps> = (props) => {
   const handleDialogOperation = (item: operationGroupDialogState) => {
   }
 
+  const searchbarOperation = (type:string,data: any) => {
+    childRef['current']['verification']().then((res:any) => {
+      console.log('res=>',res)
+    })
+  }
           
   return (
     <div className='platformManage-frame'>
@@ -165,8 +171,7 @@ const Platform:React.FC<PlatformProps> = (props) => {
             ),
             content: (
               <>  
-                  <SearchBar configData={configData} optionObj={optionObj}/>
-                  4123213123
+                  <SearchBar searchbarOperation={searchbarOperation} cRef={childRef} configData={configData} optionObj={optionObj}/>
               </>
             )
           }
