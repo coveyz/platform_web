@@ -20,6 +20,7 @@ const Dialog:React.FC<DialogProps> = (props) => {
   return (
     <div>
       <Modal
+          destroyOnClose={true}
           visible={visible}
           closable={false}
           title={ dialogInfo.title? dialogInfo.title : 'title'}

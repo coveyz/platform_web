@@ -2,7 +2,8 @@ import http from '@/utils/request'
 import {
   platformListState, platformoperationState, platformDetailState, deletePlatformState,
   roleOfSelectUserState, roleGroupOfSelectUserState,
-  selectedUserState,userToBeSelectedState
+  selectedUserState,userToBeSelectedState,
+  saveUserOfPlatformState
 } from './type.d'
 
 export const getPlatformList = (requestData: platformListState) => {
@@ -74,6 +75,14 @@ export const userToBeSelected = (requestData:userToBeSelectedState) => {
   return http({
     method: "POST",
     data: requestData,
-    url: `/api/pmUserLink/querySelected`
+    url: `/api/pmUserLink/queryToBeSelected`
+  })
+}
+/** 为平台 保存用户 */
+export const saveUserOfPlatform = (requestData: saveUserOfPlatformState) => {
+  return http({
+    method: "POST",
+    data: requestData,
+    url: `/api/pmUserLink/savePmUserLink`
   })
 }

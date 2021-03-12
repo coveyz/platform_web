@@ -5,7 +5,8 @@ import config from '@/pages/platform/config/platform'
 import PlatformItem from './components/Item'
 import {ButtonGroup,Dialog,SearchBar,Transfer} from '@/components'
 import {buttonState,operationGroupDialogState} from '@/components/type.d'
-import {getPlatformList,getRole,getRoleGroup,getDept} from '@/api/platform'
+import {getPlatformList,getRole,getRoleGroup,getDept,selectedUser,userToBeSelected,saveUserOfPlatform} from '@/api/platform'
+import {selectedUserState,userToBeSelectedState} from '@/api/platform/type.d'
 import {integrationData} from '@/utils/tools'
 
 
@@ -15,17 +16,14 @@ type PlatformProps = {
 
 const Platform:React.FC<PlatformProps> = (props) => {
   const childRef = useRef<any>(null)
-  const [configData,setConfigData] = useState(config)
-  const [platformList,setplatformList] = useState([])
-  const [loading,setloading] = useState(true) 
-  const [optionObj,setOptionsObj] = useState({})
-  const [dialogState,setDialogState] = useState({
-    visible: false,
-    isOption: true,
-    width: '55%',
-    title: '请选择用户',
-    type: ''
-  })
+  const transferRef = useRef<any>(null)
+  const [configData,setConfigData] = useState(config) //* 配置表
+  const [platformList,setplatformList] = useState([]) 
+  const [loading,setloading] = useState(true)  //* loading
+  const [optionObj,setOptionsObj] = useState({}) //* operation
+  const [dialogState,setDialogState] = useState({visible: false,isOption: true,width: '55%',title: '请选择用户',type: '',id: ''}) //* dialog
+  const [targetArr,setTargetArr] = useState([]) //* 未选
+  const [selectedArr,setSelectedArr] = useState([]) //* 已选
 
   useEffect(() => {
     getInit() 
@@ -117,7 +115,7 @@ const Platform:React.FC<PlatformProps> = (props) => {
         editOptions(id)
         break;
       case 'setting': 
-        settingOptions()
+        settingOptions(id)
         break
       default:
         break;
@@ -131,18 +129,89 @@ const Platform:React.FC<PlatformProps> = (props) => {
   const editOptions = (id:string) => {
     props.history.push(`/platform/edit/${id}`)
   }
+  /** 已选人 - 机构 */
+  const selecdtUserOfPlatform = (requestData: selectedUserState) => {
+    return new Promise(resolve => {
+      selectedUser(requestData).then(res => {
+        const {data} = res.data
+        console.log('已选人=>',data)
+        resolve({selected: data.map((item:any) => ({...item,isCandidate: true}))})
+      })
+    })
+  }
+  /** 未选人 - 机构 */
+  const notSelectUserOfPlatform = (requestData: userToBeSelectedState) => {
+  return new Promise(resolve => {
+      userToBeSelected(requestData).then(res => {
+        const {data} = res.data
+        console.log('未选人',data)
+        resolve({target: data.map((item:any) => ({...item,isCandidate: false}))})
+      })
+  })
+  }
   /** 设置选人 操作 */
-  const settingOptions = () => {
-    setDialogState({...dialogState,visible: true, type: 'setting'})
+  const settingOptions = (id:string) => {
+    const requestData = {
+      selectedUserRequestData: {personName: '',pmId: id},
+      notSelectedUserRequestData: {personName: '',groupId: '',deptId: ''}
+    }
+    
+    const {selectedUserRequestData,notSelectedUserRequestData} = requestData
+    return Promise.all([selecdtUserOfPlatform(selectedUserRequestData),notSelectUserOfPlatform(notSelectedUserRequestData)]).then(res => {
+      const {target,selected} = integrationData(res)
+      setSelectedArr(selected)
+      setTargetArr(target)      
+      setDialogState({...dialogState,visible: true, type: 'setting',id: id })
+    })
   }
   /** Dialog 事件 */
   const handleDialogOperation = (item: operationGroupDialogState) => {
+    const {name} = item
+    switch (name) {
+      case 'confirm':
+        confirmOpertaion()
+        break;
+        case 'cancel':
+          console.log('cancel')
+          closeSelectUserDilog()
+          break
+          default:
+            break;
+          }
+    }
+        
+        /** dialog confire 操作 */
+  const confirmOpertaion = () => {
+    console.log('confirm',selectedArr)
+    const requestData = {
+      pmId: dialogState['id'],
+      userIds: (selectedArr as string[])
+    }
+    console.log('requ=>',requestData)
+    saveUserOfPlatform(requestData).then(res => {
+      console.log('sevaeUserOfPlatform=>',res)
+      closeSelectUserDilog()
+    })
   }
+
+  /** 关闭选人组件 dialog */
+  const closeSelectUserDilog = () => {
+    setDialogState({...dialogState,visible: false, type: '',id: ''})
+  }
+
 
   /** searchbar 事件 */
   const searchbarOperation = (type:string,data: any) => {
     childRef['current']['verification']().then((res:any) => {
-      console.log('res=>',res)
+      const requestData = {}
+      Object.keys(res).forEach(key => { 
+        requestData[key] = res[key] ? res[key] : ''
+      }) 
+      notSelectUserOfPlatform(requestData as userToBeSelectedState).then((res:any) => {
+        const {target} = res
+        setTargetArr(target)      
+        transferRef.current.reset(target)
+      })
     })
   }
 
@@ -176,7 +245,7 @@ const Platform:React.FC<PlatformProps> = (props) => {
                     <SearchBar searchbarOperation={searchbarOperation} cRef={childRef} configData={configData} optionObj={optionObj}/>
                   </div>
                   <div className="selectUser-frame">
-                    <Transfer />
+                    <Transfer transferRef={transferRef} targetArr={targetArr} selectedArr={selectedArr} setSelected={setSelectedArr}/>
                   </div>
               </>
             )

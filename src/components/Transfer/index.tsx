@@ -1,48 +1,60 @@
-import React, { useState } from 'react'
+import React, { useState,useImperativeHandle } from 'react'
 import { Transfer } from 'antd';
 
-const mockData: any[] | undefined = [];
-for (let i = 0; i < 20; i++) {
-  mockData.push({
-    key: i.toString(),
-    title: `content${i + 1}`,
-    description: `description of content${i + 1}`,
-  });
+type TransferProps = {
+  targetArr: any[] //* 未选 
+  selectedArr :any[] //* 选中
+  titles?: string[]
+  renderKey?: string
+  setSelected?: any // 选中人的方法
+  transferRef?:any
 }
 
-const initialTargetKeys = mockData.filter(item => +item.key > 10).map(item => item.key);
+const TransferItem:React.FC<TransferProps> = (props) => {
 
-const TransferItem = () => {
+  const {targetArr,selectedArr,titles,setSelected} = props
 
-  const [targetKeys, setTargetKeys] = useState(initialTargetKeys);
-  const [selectedKeys, setSelectedKeys] = useState<any>([]);
+  const [mockData,setMockData] = useState<any[]>(targetArr)
+  const [targetKeys, setTargeKeys] = useState<string[]>(selectedArr.map(item=> item.id));
+  const [selectedKeys, setSelectedKeys] = useState<any[]>([]);
+
   const onChange = (nextTargetKeys:any, direction:any, moveKeys:any) => {
-    console.log('targetKeys:', nextTargetKeys);
-    console.log('direction:', direction);
-    console.log('moveKeys:', moveKeys);
-    setTargetKeys(nextTargetKeys);
+    setTargeKeys(nextTargetKeys);   
+    setSelected(nextTargetKeys)
   };
 
+
   const onSelectChange = (sourceSelectedKeys:any, targetSelectedKeys:any) => {
-    console.log('sourceSelectedKeys:', sourceSelectedKeys);
-    console.log('targetSelectedKeys:', targetSelectedKeys);
+    console.log('onSelectChange=>',sourceSelectedKeys)
     setSelectedKeys([...sourceSelectedKeys, ...targetSelectedKeys]);
   };
 
-  const filterOption = (inputValue:any, option:any) => option.description.indexOf(inputValue) > -1;
+  const chinese = { itemUnit: '项', itemsUnit: '项', searchPlaceholder: '请输入搜索内容' }
+
+  useImperativeHandle(props.transferRef, () => ({
+    reset: (arr:any) => {
+      setMockData(arr)
+      console.log('reset')
+    },
+    backFill: () => {
+    }
+  }));
 
   return (
+   <div>
     <Transfer
-    dataSource={mockData}
-    titles={['待选', '已选']}
-    targetKeys={targetKeys}
-    showSearch
-    filterOption={filterOption}
-    selectedKeys={selectedKeys}
-    onChange={onChange}
-    onSelectChange={onSelectChange}
-    render={item => item.title}
-  />
+      locale={chinese}
+      rowKey={record => record.id}
+      dataSource={mockData}
+      titles={ titles ? titles : ['待选', '已选']}
+      showSearch
+      render={item => item.personName}
+      targetKeys={targetKeys}
+      selectedKeys={selectedKeys}
+      onChange={onChange}
+      onSelectChange={onSelectChange}
+    />
+   </div>
   )
 }
 

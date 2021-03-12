@@ -44,3 +44,8 @@ export type userToBeSelectedState = {
   groupId: string
   deptId: string
 }
+
+export type saveUserOfPlatformState = {
+  pmId: string
+  userIds: string[]
+}

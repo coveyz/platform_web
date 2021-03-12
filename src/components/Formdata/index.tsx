@@ -54,6 +54,9 @@ const Formdata:React.FC<FormDataProps> = (props) => {
          .catch((err) => err)
       })
     },
+    getFormItemObj: () => {
+      console.log('xxxx')
+    },
     reset: () => {
       clearItemArr()
       setFormModel(initFormDataModel())
