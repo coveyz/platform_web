@@ -25,7 +25,7 @@ const TransferItem:React.FC<TransferProps> = (props) => {
 
 
   const onSelectChange = (sourceSelectedKeys:any, targetSelectedKeys:any) => {
-    console.log('onSelectChange=>',sourceSelectedKeys)
+    // console.log('onSelectChange=>',sourceSelectedKeys)
     setSelectedKeys([...sourceSelectedKeys, ...targetSelectedKeys]);
   };
 
@@ -34,7 +34,7 @@ const TransferItem:React.FC<TransferProps> = (props) => {
   useImperativeHandle(props.transferRef, () => ({
     reset: (arr:any) => {
       setMockData(arr)
-      console.log('reset')
+      // console.log('reset')
     },
     backFill: () => {
     }

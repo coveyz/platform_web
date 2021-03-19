@@ -25,19 +25,19 @@ const HeaderBar:React.FC<HeaderBarProps> = (props) => {
   return (
     <Menu mode="horizontal" selectedKeys={[entryKey]} className='HeaderBar' onClick={handleClick}>
       {
-        routerMap.map((item:constantsProps) => {
+        routerMap.map((item:constantsProps,key:number) => {
           // if (!item.hidden && permissonTabs.indexOf(item.limit) > -1) {
           if (!item.hidden) {
             return (
               <Menu.Item key={item.path}>
-                <Link to={item.path}>
+                <Link to={item.path} key={`${item.path}${Math.random()}`}>
                   { item.icon && <SvgIcons iconClass={item.icon}/>}
                   {item.title}
                 </Link>
               </Menu.Item>
             )
           } else {
-            return <></>
+            return 
           }
         })
       }

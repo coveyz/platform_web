@@ -1,0 +1,8 @@
+.system-wrapper {
+	height: 100%;
+	.system-content-frame {
+		padding: 20px;
+		position: relative;
+		height: calc(100% - 45px);
+	}
+}

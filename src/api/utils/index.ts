@@ -16,3 +16,12 @@ export const listDict = (requestData: string[]) => {
     url: `/api/dict/listDictArray`
   })
 }
+
+/** 渲染列表 ⌚️ */
+export const getList = (requestData:any,url: string) => {
+  return http({
+    method:"POST",
+    data: requestData,
+    url: url
+  })
+}

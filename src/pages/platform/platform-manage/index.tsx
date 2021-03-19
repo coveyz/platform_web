@@ -9,7 +9,6 @@ import {getPlatformList,getRole,getRoleGroup,getDept,selectedUser,userToBeSelect
 import {selectedUserState,userToBeSelectedState} from '@/api/platform/type.d'
 import {integrationData} from '@/utils/tools'
 
-
 type PlatformProps = {
   history: any
 }
@@ -198,7 +197,6 @@ const Platform:React.FC<PlatformProps> = (props) => {
   const closeSelectUserDilog = () => {
     setDialogState({...dialogState,visible: false, type: '',id: ''})
   }
-
 
   /** searchbar 事件 */
   const searchbarOperation = (type:string,data: any) => {
